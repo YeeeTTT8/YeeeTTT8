@@ -68,7 +68,12 @@ export default function HomePage() {
   return (
     <>
       {/* 1 — Video hero */}
-      <VideoHero src="/warehouse-tour.mp4" poster="/warehouse-poster.jpg" enabled={env.heroMedia}>
+      <VideoHero
+        src="/warehouse-tour.mp4"
+        poster="/warehouse-poster.jpg"
+        enabled={env.heroMedia}
+        image={{ src: '/placeholders/warehouse-hero', alt: 'Rows of natural stone slabs in the InStyle warehouse' }}
+      >
         <Container className="pb-20 pt-40">
           <Reveal>
             <p className="eyebrow text-brass">{site.tagline}</p>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { ImageRef } from '@/content/types';
 import { isPlaceholder, toneFor } from '@/lib/placeholder';
+import { resolvePlaceholder } from '@/lib/images';
 import { cn } from '@/lib/utils';
 
 interface StoneImageProps {
@@ -32,7 +33,11 @@ export function StoneImage({
   priority = false,
   showTag = true,
 }: StoneImageProps) {
-  if (isPlaceholder(image.src)) {
+  // A placeholder path may resolve to a real (remote) image; if so, render it.
+  const resolved = resolvePlaceholder(image.src);
+  const effectiveSrc = resolved ?? image.src;
+
+  if (isPlaceholder(effectiveSrc)) {
     const tone = toneFor(image.src || image.alt);
     return (
       <div
@@ -57,7 +62,7 @@ export function StoneImage({
 
   return (
     <Image
-      src={image.src}
+      src={effectiveSrc}
       alt={image.alt}
       fill={fill}
       sizes={sizes}
