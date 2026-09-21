@@ -30,13 +30,16 @@ export function Bookmatch({
 
       {/* Centre seam */}
       <div aria-hidden className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-paper/20" />
-      <div aria-hidden className="absolute inset-0 bg-stone-900/25" />
+      <div aria-hidden className="absolute inset-0 bg-stone-900/20" />
+      {(eyebrow || title) && (
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/25 to-transparent" />
+      )}
       <div className="grain" />
 
       {(eyebrow || title) && (
         <div className="absolute inset-0 flex items-center">
           <Container>
-            <div className="max-w-md text-paper">
+            <div className="max-w-md text-paper [text-shadow:0_1px_20px_rgba(0,0,0,0.45)]">
               {eyebrow ? <p className="eyebrow text-brass">{eyebrow}</p> : null}
               {title ? (
                 <p className="mt-4 font-display text-display-md font-normal leading-tight">

@@ -101,11 +101,15 @@ export function VideoHero({ src, poster, enabled = false, image, children }: Vid
         />
       ) : null}
 
-      {/* Dark overlay for text legibility. */}
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/40 to-stone-900/30" />
+      {/* Layered scrim for guaranteed text legibility over any frame:
+          an even darken, a bottom-up gradient, and a left-side gradient
+          (the headline sits bottom-left). */}
+      <div aria-hidden className="absolute inset-0 bg-stone-900/40" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/95 via-stone-900/55 to-stone-900/35" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/30 to-transparent" />
       <div className="grain" />
 
-      <div className="relative z-10 w-full">{children}</div>
+      <div className="relative z-10 w-full [text-shadow:0_1px_24px_rgba(0,0,0,0.4)]">{children}</div>
     </section>
   );
 }
