@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { toneFor } from '@/lib/placeholder';
+import { StoneImage } from '@/components/ui/StoneImage';
+import type { ImageRef } from '@/content/types';
 
 interface VideoHeroProps {
   /** Path to the looping video in /public. */
@@ -10,9 +12,12 @@ interface VideoHeroProps {
   poster?: string;
   /**
    * Whether the real video/poster assets exist. When false (the default until
-   * assets are supplied), only the gradient base renders so there are no 404s.
+   * assets are supplied), only the gradient/image base renders so there are no
+   * 404s.
    */
   enabled?: boolean;
+  /** Static base image shown behind the overlay when the video is not playing. */
+  image?: ImageRef;
   children: React.ReactNode;
 }
 
@@ -23,7 +28,7 @@ interface VideoHeroProps {
  * - Always renders a stone-toned gradient base so it is never blank when the
  *   video/poster assets are not yet supplied. TODO(client): warehouse-tour.mp4.
  */
-export function VideoHero({ src, poster, enabled = false, children }: VideoHeroProps) {
+export function VideoHero({ src, poster, enabled = false, image, children }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [canPlay, setCanPlay] = useState(false);
@@ -63,8 +68,15 @@ export function VideoHero({ src, poster, enabled = false, children }: VideoHeroP
       ref={sectionRef}
       className="relative flex min-h-[92vh] items-end overflow-hidden bg-stone-900 text-paper"
     >
-      {/* Gradient base — always present. */}
+      {/* Gradient base — always present as the ultimate fallback. */}
       <div aria-hidden className="absolute inset-0" style={{ background: tone.background }} />
+
+      {/* Static base image (shown behind the overlay when video isn't playing). */}
+      {image ? (
+        <div aria-hidden className="absolute inset-0">
+          <StoneImage image={image} sizes="100vw" priority showTag={false} />
+        </div>
+      ) : null}
 
       {enabled && canPlay ? (
         <video

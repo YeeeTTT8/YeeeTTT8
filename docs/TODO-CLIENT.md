@@ -6,7 +6,14 @@ invented; each is a factual gap awaiting real data.
 ## Brand assets
 - [ ] Logo SVG (red/black "instyle" wordmark) → `/public/` (currently styled text)
 - [ ] Warehouse hero video `warehouse-tour.mp4` + poster image → `/public/`
-- [ ] Real slab photography (close-ups: veining, texture) to replace placeholders
+- [ ] **Replace generated imagery with real photography.** The site currently
+      shows AI-generated, representative images (slab textures, room scenes,
+      warehouse) hosted on a generation CDN and referenced remotely via
+      `lib/images.ts`. They are licence-clean placeholders, **not the actual
+      slabs/showrooms**. Replace with real photos and self-host under
+      `/public/images`, then update the single map in `lib/images.ts` and remove
+      the CDN entry from `next.config.mjs` `remotePatterns`. Any image whose
+      resolver returns null falls back to a stone-toned gradient automatically.
 
 ## Contact details
 - [ ] Company phone number (`NEXT_PUBLIC_PHONE`)
