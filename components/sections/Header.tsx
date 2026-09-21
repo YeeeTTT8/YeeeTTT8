@@ -46,7 +46,19 @@ export function Header({ transparentOverHero }: HeaderProps) {
           : 'bg-transparent border-b border-transparent',
       )}
     >
-      <div className="mx-auto flex max-w-content items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+      {/* Top-down scrim so nav stays legible over a bright hero. */}
+      {!solid ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-stone-900/75 via-stone-900/30 to-transparent"
+        />
+      ) : null}
+      <div
+        className={cn(
+          'mx-auto flex max-w-content items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10',
+          !solid && '[text-shadow:0_1px_10px_rgba(0,0,0,0.55)]',
+        )}
+      >
         {/* Wordmark. TODO(client): replace with supplied logo SVG. */}
         <Link
           href="/"
@@ -73,7 +85,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
                 aria-current={active ? 'page' : undefined}
                 className={cn(
                   'link-underline text-fluid-sm font-medium transition-colors',
-                  solid ? 'text-stone-600 hover:text-stone-900' : 'text-paper/90 hover:text-paper',
+                  solid ? 'text-stone-600 hover:text-stone-900' : 'text-paper hover:text-paper',
                   active && (solid ? 'text-stone-900' : 'text-paper'),
                 )}
               >
