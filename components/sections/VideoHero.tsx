@@ -8,6 +8,11 @@ interface VideoHeroProps {
   src: string;
   /** Poster image path in /public (shown before/without playback). */
   poster?: string;
+  /**
+   * Whether the real video/poster assets exist. When false (the default until
+   * assets are supplied), only the gradient base renders so there are no 404s.
+   */
+  enabled?: boolean;
   children: React.ReactNode;
 }
 
@@ -18,19 +23,20 @@ interface VideoHeroProps {
  * - Always renders a stone-toned gradient base so it is never blank when the
  *   video/poster assets are not yet supplied. TODO(client): warehouse-tour.mp4.
  */
-export function VideoHero({ src, poster, children }: VideoHeroProps) {
+export function VideoHero({ src, poster, enabled = false, children }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [canPlay, setCanPlay] = useState(false);
   const tone = toneFor('warehouse-hero-nero');
 
   useEffect(() => {
+    if (!enabled) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Best-effort data-saver detection.
     const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
     const saveData = Boolean(nav.connection?.saveData);
     setCanPlay(!reduce && !saveData);
-  }, []);
+  }, [enabled]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -60,7 +66,7 @@ export function VideoHero({ src, poster, children }: VideoHeroProps) {
       {/* Gradient base — always present. */}
       <div aria-hidden className="absolute inset-0" style={{ background: tone.background }} />
 
-      {canPlay ? (
+      {enabled && canPlay ? (
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
@@ -73,17 +79,15 @@ export function VideoHero({ src, poster, children }: VideoHeroProps) {
         >
           <source src={src} type="video/mp4" />
         </video>
-      ) : (
-        poster && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={poster}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        )
-      )}
+      ) : enabled && poster ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
 
       {/* Dark overlay for text legibility. */}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/40 to-stone-900/30" />

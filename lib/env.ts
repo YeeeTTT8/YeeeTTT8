@@ -19,6 +19,7 @@ function readPublic(key: string, fallback = ''): string {
     NEXT_PUBLIC_WHATSAPP: process.env.NEXT_PUBLIC_WHATSAPP,
     NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+    NEXT_PUBLIC_HERO_MEDIA: process.env.NEXT_PUBLIC_HERO_MEDIA,
   };
   return map[key] ?? fallback;
 }
@@ -39,6 +40,8 @@ export const env = {
   whatsapp: readPublic('NEXT_PUBLIC_WHATSAPP'),
   contactEmail: readPublic('NEXT_PUBLIC_CONTACT_EMAIL'),
   gaId: readPublic('NEXT_PUBLIC_GA_ID'),
+  /** Set to "true" once /public/warehouse-tour.mp4 + poster exist. */
+  heroMedia: readPublic('NEXT_PUBLIC_HERO_MEDIA') === 'true',
   get isAnalyticsConfigured(): boolean {
     return this.gaId.length > 0;
   },

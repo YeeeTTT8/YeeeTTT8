@@ -57,15 +57,23 @@ components — use the semantic Tailwind classes.
 - **Collection:** add to `content/collections.ts`; set `material` and `featured`.
 - **Journal post:** add to `content/journal.ts` with `slug`, `date`, `body`.
 
-## Build phases
+## Build phases (all complete)
 1. **Foundation** ✅ — tokens, fonts, layout, header/footer, Button, Reveal,
    SectionHeading, content types, `/_design`.
-2. Home page (video hero + all sections).
-3. Materials, Collections, Stone detail (filtering + lightbox).
-4. Showrooms, Services, About, Gallery, Journal, FAQ.
-5. Quote/Contact flow (RHF + Zod + Resend, file upload).
-6. SEO, JSON-LD, sitemap, robots, analytics + consent, 404, legal.
-7. Polish: motion, a11y audit, performance, cross-browser, docs.
+2. **Home** ✅ — video hero + all sections.
+3. **Catalog** ✅ — Materials, Collections, Stone detail (filtering + lightbox).
+4. **Content** ✅ — Showrooms, Services, About, Gallery, Journal, FAQ.
+5. **Forms** ✅ — Quote/Contact flow (RHF + Zod + Resend, file upload).
+6. **SEO** ✅ — JSON-LD, sitemap, robots, analytics + consent, 404, legal.
+7. **Polish** ✅ — mobile bottom bar, back-to-top, hero-media gating, a11y and
+   console pass, docs.
+
+### Verified here vs. verify-on-deploy
+`pnpm build`, `pnpm lint`, `pnpm typecheck` pass, and every route renders 200
+with the expected content and no missing-asset requests. **Lighthouse/axe
+targets (95+, LCP <2.5s, CLS <0.05) cannot be certified in this environment** —
+they depend on the real fonts, video and photography and a real deployment.
+Run them against the Vercel preview once assets land (see `docs/TODO-CLIENT.md`).
 
 ## Deployment
 Target **Vercel**. Set env vars from `.env.example` in the project settings.

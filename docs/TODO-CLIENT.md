@@ -41,5 +41,15 @@ For each of Houston, Memphis, Nashville, Denver, Atlanta, Columbus:
 ## Config
 - [ ] Production `NEXT_PUBLIC_SITE_URL`
 - [ ] GA4 measurement ID (`NEXT_PUBLIC_GA_ID`)
-- [ ] Resend API key (`RESEND_API_KEY`)
+- [ ] Resend API key (`RESEND_API_KEY`) + `QUOTE_RECIPIENT_EMAIL` / `QUOTE_FROM_EMAIL`
+- [ ] Set `NEXT_PUBLIC_HERO_MEDIA="true"` after adding the hero video + poster
 - [ ] Confirm StoneProfitsWeb inventory URLs are current
+
+## Engineering follow-ups (not blocking launch, but recommended)
+- [ ] Rate limiting is in-memory (per serverless instance). For production,
+      back `lib/rate-limit.ts` with a shared store (e.g. Upstash Redis).
+- [ ] Legal pages (Privacy, Terms) are placeholder skeletons — replace with
+      copy reviewed by qualified counsel.
+- [ ] Verify Lighthouse (Performance/A11y/SEO/Best-Practices ≥95, LCP <2.5s,
+      CLS <0.05) on the deployed URL with real fonts, video and photography —
+      these targets can only be certified against a real deployment.

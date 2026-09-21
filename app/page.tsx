@@ -14,6 +14,7 @@ import { VideoHero } from '@/components/sections/VideoHero';
 import { InventoryBanner } from '@/components/sections/InventoryBanner';
 import { CTABand } from '@/components/sections/CTABand';
 import { site, inventoryLink } from '@/lib/site';
+import { env } from '@/lib/env';
 import { materials } from '@/content/materials';
 import { getFeaturedCollections } from '@/content/collections';
 import { locations } from '@/content/locations';
@@ -67,7 +68,7 @@ export default function HomePage() {
   return (
     <>
       {/* 1 — Video hero */}
-      <VideoHero src="/warehouse-tour.mp4" poster="/warehouse-poster.jpg">
+      <VideoHero src="/warehouse-tour.mp4" poster="/warehouse-poster.jpg" enabled={env.heroMedia}>
         <Container className="pb-20 pt-40">
           <Reveal>
             <p className="eyebrow text-brass">{site.tagline}</p>

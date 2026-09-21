@@ -4,6 +4,8 @@ import { site } from '@/lib/site';
 import { env } from '@/lib/env';
 import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
+import { MobileBottomBar } from '@/components/sections/MobileBottomBar';
+import { BackToTop } from '@/components/ui/BackToTop';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/Analytics';
 import { organizationJsonLd, webSiteJsonLd } from '@/lib/seo/jsonld';
@@ -36,6 +38,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
+        {/* Spacer so the fixed mobile bottom bar never covers footer content. */}
+        <div className="h-14 lg:hidden" aria-hidden />
+        <MobileBottomBar />
+        <BackToTop />
         <Analytics gaId={env.gaId} />
       </body>
     </html>
