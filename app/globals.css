@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Design tokens — single source of truth. Tailwind maps these in
+   tailwind.config.ts. Verify against the logo; all text/bg pairs must pass
+   WCAG AA (see docs/DESIGN-TOKENS.md for the contrast audit).
+   ========================================================================== */
+:root {
+  --ivory: #f6f2ea; /* page background */
+  --paper: #fbf9f4; /* raised surfaces */
+  --stone-900: #1a1816; /* primary text, dark sections */
+  --stone-600: #5a554d; /* secondary text */
+  --stone-300: #d9d2c5; /* hairlines, borders */
+  --brass: #a8865a; /* accent — small details, eyebrows, numerals only */
+  --brand-red: #c8102e; /* primary CTA and tiny highlights only */
+
+  /* A slightly darker brass reserved for text that must meet AA on ivory. */
+  --brass-ink: #806034;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--ivory);
+    color: var(--stone-900);
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--brass);
+    color: var(--paper);
+  }
+
+  /* Visible focus for keyboard users — brass ring, 2px offset. */
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Headings default to the display serif. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Small uppercase brass eyebrow used above section titles. Uses the darker
+     brass-ink for AA at small sizes. */
+  .eyebrow {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass-ink);
+  }
+
+  /* Thin brass rule. */
+  .rule-brass {
+    height: 1px;
+    width: 3rem;
+    background-color: var(--brass);
+  }
+
+  /* Animated link underline — draws in on hover/focus. */
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Skip-to-content link — visually hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--stone-900);
+  color: var(--paper);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  transition: top 200ms ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
