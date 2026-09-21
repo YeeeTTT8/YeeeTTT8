@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
+import { RevealImage } from '@/components/ui/RevealImage';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { StoneImage } from '@/components/ui/StoneImage';
 import { CollectionCard } from '@/components/ui/CollectionCard';
@@ -56,11 +57,9 @@ export default async function MaterialPage({ params }: { params: Promise<{ slug:
       {/* Image band */}
       <section className="bg-ivory pb-band">
         <Container>
-          <Reveal>
-            <div className="relative aspect-[16/7] w-full overflow-hidden rounded-sm bg-stone-900">
-              <StoneImage image={material.image} sizes="100vw" priority showTag={false} />
-            </div>
-          </Reveal>
+          <RevealImage className="relative aspect-[16/7] w-full rounded-sm bg-stone-900">
+            <StoneImage image={material.image} sizes="100vw" priority showTag={false} />
+          </RevealImage>
         </Container>
       </section>
 

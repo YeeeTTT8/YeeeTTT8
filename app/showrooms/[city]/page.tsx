@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
+import { RevealImage } from '@/components/ui/RevealImage';
 import { StoneImage } from '@/components/ui/StoneImage';
 import { Button } from '@/components/ui/Button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -57,11 +58,9 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
             ]}
           />
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-            <Reveal>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-stone-900">
-                <StoneImage image={loc.image} sizes="(min-width: 1024px) 55vw, 100vw" priority showTag={false} />
-              </div>
-            </Reveal>
+            <RevealImage className="relative aspect-[4/3] w-full rounded-sm bg-stone-900">
+              <StoneImage image={loc.image} sizes="(min-width: 1024px) 55vw, 100vw" priority showTag={false} />
+            </RevealImage>
             <div>
               <Reveal>
                 <p className="eyebrow">{loc.brand}</p>

@@ -9,8 +9,9 @@ import { inventoryLink } from '@/lib/site';
  */
 export function InventoryBanner() {
   return (
-    <section className="bg-stone-900 text-paper">
-      <Container className="py-band">
+    <section className="relative overflow-hidden bg-stone-900 text-paper">
+      <div className="grain" />
+      <Container className="relative py-band">
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <Reveal>
             <p className="eyebrow text-brass">Updated continuously</p>

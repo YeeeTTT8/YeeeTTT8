@@ -8,6 +8,7 @@ import { ImageTile } from '@/components/ui/ImageTile';
 import { CollectionCard } from '@/components/ui/CollectionCard';
 import { PillarList, type Pillar } from '@/components/ui/PillarList';
 import { StatCounter } from '@/components/ui/StatCounter';
+import { Marquee } from '@/components/ui/Marquee';
 import { LocationCard } from '@/components/ui/LocationCard';
 import { JournalCard } from '@/components/ui/JournalCard';
 import { VideoHero } from '@/components/sections/VideoHero';
@@ -76,11 +77,12 @@ export default function HomePage() {
       >
         <Container className="pb-20 pt-40">
           <Reveal>
-            <p className="eyebrow text-brass">{site.tagline}</p>
+            <p className="eyebrow eyebrow-rule text-brass">{site.tagline}</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-6 max-w-4xl text-display-xl font-medium text-paper">
-              Stone selected slab by slab, from our quarries to your project.
+              Stone selected <em className="font-normal italic text-brass">slab by slab</em>, from
+              our quarries to your project.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
@@ -102,8 +104,9 @@ export default function HomePage() {
         </Container>
 
         {/* Scroll cue */}
-        <div className="absolute inset-x-0 bottom-6 flex justify-center">
+        <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-3">
           <span className="text-[11px] uppercase tracking-eyebrow text-paper/60">Scroll</span>
+          <span className="h-10 w-px bg-gradient-to-b from-paper/50 to-transparent" aria-hidden />
         </div>
       </VideoHero>
 
@@ -111,8 +114,8 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <Reveal>
-            <div className="rule-brass" />
-            <p className="mt-8 max-w-4xl font-display text-display-md font-normal leading-tight text-stone-900">
+            <p className="eyebrow eyebrow-rule mb-8">Est. {site.established}</p>
+            <p className="dropcap max-w-4xl font-display text-display-md font-normal leading-tight text-stone-900">
               Every slab is a single, unrepeatable thing — a record of pressure, heat and
               time. We hold them in depth so you can choose the one that&rsquo;s right, and
               stand behind it from selection to delivery.
@@ -121,10 +124,14 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Marquee band */}
+      <Marquee items={['Granite', 'Marble', 'Quartz', 'Quartzite']} />
+
       {/* 3 — Materials */}
-      <section className="bg-ivory pb-band">
+      <section className="bg-ivory py-band">
         <Container>
           <SectionHeading
+            index="01"
             eyebrow="Four materials"
             title="Choose by the stone itself"
             intro="Granite, marble, quartz and quartzite each behave differently. Start where it makes sense for how you live."
@@ -150,6 +157,7 @@ export default function HomePage() {
       <section className="bg-paper py-band-lg">
         <Container>
           <SectionHeading
+            index="02"
             eyebrow="Collections"
             title="Curated by colour and character"
             intro="Named groupings that make a wide inventory easy to navigate — each with its own story."
@@ -174,7 +182,7 @@ export default function HomePage() {
       {/* 5 — Why InStyle */}
       <section className="bg-ivory py-band-lg">
         <Container>
-          <SectionHeading eyebrow="Why InStyle" title="A distributor built around selection" />
+          <SectionHeading index="03" eyebrow="Why InStyle" title="A distributor built around selection" />
           <div className="mt-12">
             <PillarList pillars={pillars} />
           </div>
@@ -206,6 +214,7 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <SectionHeading
+            index="04"
             eyebrow="Find it in place"
             title="See stone in the room"
             intro="Curated scenes by space. A full 3D visualizer is on the roadmap; for now, explore collections suited to each room."
@@ -232,6 +241,7 @@ export default function HomePage() {
       <section className="bg-paper py-band-lg">
         <Container>
           <SectionHeading
+            index="05"
             eyebrow="Showrooms"
             title="Come see the slabs"
             intro="Locations across the InStyle and Avani brands. Addresses and hours are being finalised."
@@ -255,6 +265,7 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <SectionHeading
+            index="06"
             eyebrow="Journal"
             title="Reading the stone"
             intro="Practical, honest guidance on choosing and caring for natural surfaces."

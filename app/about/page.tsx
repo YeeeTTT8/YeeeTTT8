@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
+import { RevealImage } from '@/components/ui/RevealImage';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { StoneImage } from '@/components/ui/StoneImage';
 import { StatCounter } from '@/components/ui/StatCounter';
@@ -45,15 +46,13 @@ export default function AboutPage() {
       <section className="bg-ivory pb-band-lg">
         <Container>
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-stone-900">
-                <StoneImage
-                  image={{ src: '/placeholders/about-warehouse', alt: 'Natural stone slabs stored in a warehouse' }}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  showTag={false}
-                />
-              </div>
-            </Reveal>
+            <RevealImage className="relative aspect-[4/5] w-full rounded-sm bg-stone-900">
+              <StoneImage
+                image={{ src: '/placeholders/about-warehouse', alt: 'Natural stone slabs stored in a warehouse' }}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                showTag={false}
+              />
+            </RevealImage>
             <Reveal delay={0.08} className="flex flex-col justify-center">
               <h2 className="font-display text-display-sm font-medium text-stone-900">Our story</h2>
               <div className="mt-6 space-y-5 text-fluid-base text-stone-600">

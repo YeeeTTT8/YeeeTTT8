@@ -8,8 +8,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-stone-900 text-paper">
-      <Container className="py-band">
+    <footer className="relative overflow-hidden bg-stone-900 text-paper">
+      <div className="grain" />
+      <Container className="relative py-band">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand block */}
           <div>
