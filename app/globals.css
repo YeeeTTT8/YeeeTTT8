@@ -80,6 +80,41 @@
     background-color: var(--brass);
   }
 
+  /* Oversized editorial section numeral. */
+  .section-numeral {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: clamp(2.5rem, 1.6rem + 4vw, 5rem);
+    line-height: 0.8;
+    font-weight: 500;
+    color: var(--brass);
+    opacity: 0.55;
+  }
+
+  /* Drop cap for editorial lead paragraphs. */
+  .dropcap::first-letter {
+    font-family: var(--font-display), Georgia, serif;
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.72;
+    padding-right: 0.08em;
+    margin-top: 0.06em;
+    color: var(--stone-900);
+    font-weight: 500;
+  }
+
+  /* Eyebrow with a short leading rule line. */
+  .eyebrow-rule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eyebrow-rule::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background-color: var(--brass);
+  }
+
   /* Animated link underline — draws in on hover/focus. */
   .link-underline {
     position: relative;
@@ -100,6 +135,32 @@
   .link-underline:hover::after,
   .link-underline:focus-visible::after {
     transform: scaleX(1);
+  }
+}
+
+/* Subtle film grain for tactility over dark bands. */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Infinite marquee. */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
   }
 }
 

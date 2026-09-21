@@ -6,6 +6,7 @@ import { Header } from '@/components/sections/Header';
 import { Footer } from '@/components/sections/Footer';
 import { MobileBottomBar } from '@/components/sections/MobileBottomBar';
 import { BackToTop } from '@/components/ui/BackToTop';
+import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/Analytics';
 import { organizationJsonLd, webSiteJsonLd } from '@/lib/seo/jsonld';
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
+        <ScrollProgress />
         <Header />
         <main id="main-content">{children}</main>
         <Footer />

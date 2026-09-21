@@ -103,6 +103,7 @@ export function VideoHero({ src, poster, enabled = false, image, children }: Vid
 
       {/* Dark overlay for text legibility. */}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/40 to-stone-900/30" />
+      <div className="grain" />
 
       <div className="relative z-10 w-full">{children}</div>
     </section>

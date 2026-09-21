@@ -13,6 +13,8 @@ interface SectionHeadingProps {
   as?: 'h1' | 'h2' | 'h3';
   align?: 'left' | 'center';
   className?: string;
+  /** Optional oversized editorial numeral, e.g. "01". */
+  index?: string;
 }
 
 /**
@@ -26,10 +28,18 @@ export function SectionHeading({
   as: Tag = 'h2',
   align = 'left',
   className,
+  index,
 }: SectionHeadingProps) {
   return (
     <Reveal className={cn(align === 'center' && 'text-center', className)}>
-      {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
+      {index ? (
+        <span className={cn('section-numeral mb-4 block', align === 'center' && 'text-center')}>
+          {index}
+        </span>
+      ) : null}
+      {eyebrow ? (
+        <p className={cn('eyebrow mb-4', align !== 'center' && 'eyebrow-rule')}>{eyebrow}</p>
+      ) : null}
       <Tag className="text-display-md text-stone-900 max-w-prose">{title}</Tag>
       <div className={cn('rule-brass mt-6', align === 'center' && 'mx-auto')} />
       {intro ? (
