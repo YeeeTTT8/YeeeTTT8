@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ImageTile } from '@/components/ui/ImageTile';
-import { CollectionCard } from '@/components/ui/CollectionCard';
 import { PillarList, type Pillar } from '@/components/ui/PillarList';
 import { StatCounter } from '@/components/ui/StatCounter';
 import { Marquee } from '@/components/ui/Marquee';
@@ -14,10 +13,13 @@ import { JournalCard } from '@/components/ui/JournalCard';
 import { VideoHero } from '@/components/sections/VideoHero';
 import { InventoryBanner } from '@/components/sections/InventoryBanner';
 import { CTABand } from '@/components/sections/CTABand';
+import { Bookmatch } from '@/components/sections/Bookmatch';
+import { CollectionScroller } from '@/components/sections/CollectionScroller';
+import { SectionRail } from '@/components/ui/SectionRail';
 import { site, inventoryLink } from '@/lib/site';
-import { env } from '@/lib/env';
+import { heroVideoUrl } from '@/lib/images';
 import { materials } from '@/content/materials';
-import { getFeaturedCollections } from '@/content/collections';
+import { collections } from '@/content/collections';
 import { locations } from '@/content/locations';
 import { getRecentJournal } from '@/content/journal';
 
@@ -62,7 +64,6 @@ const roomScenes = [
 ];
 
 export default function HomePage() {
-  const featured = getFeaturedCollections();
   const recentPosts = getRecentJournal(3);
   const years = new Date().getFullYear() - site.established;
 
@@ -70,9 +71,8 @@ export default function HomePage() {
     <>
       {/* 1 — Video hero */}
       <VideoHero
-        src="/warehouse-tour.mp4"
-        poster="/warehouse-poster.jpg"
-        enabled={env.heroMedia}
+        src={heroVideoUrl}
+        enabled
         image={{ src: '/placeholders/warehouse-hero', alt: 'Rows of natural stone slabs in the InStyle warehouse' }}
       >
         <Container className="pb-20 pt-40">
@@ -153,24 +153,20 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 4 — Featured collections */}
+      {/* 4 — Collections (horizontal gallery) */}
       <section className="bg-paper py-band-lg">
         <Container>
           <SectionHeading
             index="02"
             eyebrow="Collections"
             title="Curated by colour and character"
-            intro="Named groupings that make a wide inventory easy to navigate — each with its own story."
+            intro="Named groupings that make a wide inventory easy to navigate — each with its own story. Drag or scroll through them."
           />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 0.08}>
-                <CollectionCard collection={c} />
-              </Reveal>
-            ))}
+          <div className="mt-12">
+            <CollectionScroller collections={collections} />
           </div>
           <Reveal delay={0.1}>
-            <div className="mt-10">
+            <div className="mt-8">
               <Button href="/collections" variant="link">
                 View all collections →
               </Button>
@@ -179,13 +175,22 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Bookmatched slab band */}
+      <Bookmatch
+        image={{ src: '/placeholders/collection-calacatta-noir', alt: 'Bookmatched quartzite slab with mirrored veining' }}
+        eyebrow="Bookmatched"
+        title="Opened like a book, veining mirrored across the seam."
+      />
+
       {/* 5 — Why InStyle */}
       <section className="bg-ivory py-band-lg">
         <Container>
-          <SectionHeading index="03" eyebrow="Why InStyle" title="A distributor built around selection" />
-          <div className="mt-12">
-            <PillarList pillars={pillars} />
-          </div>
+          <SectionRail label="Why InStyle">
+            <SectionHeading index="03" eyebrow="Why InStyle" title="A distributor built around selection" />
+            <div className="mt-12">
+              <PillarList pillars={pillars} />
+            </div>
+          </SectionRail>
         </Container>
       </section>
 

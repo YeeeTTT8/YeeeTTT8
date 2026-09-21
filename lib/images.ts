@@ -43,6 +43,13 @@ export function imageUrl(key: string): string | null {
   return file ? `${CDN}${file}` : null;
 }
 
+/**
+ * Generated hero video (image-to-video from the warehouse frame), served
+ * remotely to the browser's <video> element. TODO(client): replace with the
+ * real warehouse-tour.mp4 and self-host under /public.
+ */
+export const heroVideoUrl = `${CDN}hf_20260921_085626_63f549b9-6f56-4171-90bf-86839bb9d9b4.mp4`;
+
 // Map each collection to its two texture variants.
 const COLLECTION_TEX: Record<string, [string, string]> = {
   'ivory-coast': ['tex-ivory-1', 'tex-ivory-2'],
