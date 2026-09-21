@@ -49,7 +49,7 @@ export function ImageTile({
       {/* Legibility gradient */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/10 to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-stone-900/95 via-stone-900/35 to-stone-900/5"
       />
 
       {/* Thin border reveal on hover */}
