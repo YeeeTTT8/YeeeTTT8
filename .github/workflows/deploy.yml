@@ -1,0 +1,72 @@
+name: Deploy to Vercel
+
+# Auto-deploys on every push. Production deploy from the default branch,
+# preview deploy from any other branch. The whole job no-ops unless the three
+# Vercel secrets are present, so it is safe to keep even before setup.
+#
+# One-time setup (repo → Settings → Secrets and variables → Actions):
+#   VERCEL_TOKEN       — vercel.com/account/tokens
+#   VERCEL_ORG_ID      — from `vercel link` (.vercel/project.json) or dashboard
+#   VERCEL_PROJECT_ID  — same source
+#
+# Prefer zero-config? Connect the repo at vercel.com/new instead and delete this
+# file — Vercel's GitHub app then handles preview + production deploys itself.
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Check for Vercel credentials
+        id: guard
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Vercel secrets not set — skipping deploy. See .github/workflows/deploy.yml for setup."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.configured == 'true'
+
+      - name: Install Vercel CLI
+        if: steps.guard.outputs.configured == 'true'
+        run: npm install --global vercel@latest
+
+      - name: Resolve environment
+        id: env
+        if: steps.guard.outputs.configured == 'true'
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/${{ github.event.repository.default_branch }}" ]; then
+            echo "target=production" >> "$GITHUB_OUTPUT"
+            echo "flag=--prod" >> "$GITHUB_OUTPUT"
+          else
+            echo "target=preview" >> "$GITHUB_OUTPUT"
+            echo "flag=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pull Vercel environment
+        if: steps.guard.outputs.configured == 'true'
+        run: vercel pull --yes --environment=${{ steps.env.outputs.target }} --token="$VERCEL_TOKEN"
+
+      - name: Build
+        if: steps.guard.outputs.configured == 'true'
+        run: vercel build ${{ steps.env.outputs.flag }} --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        if: steps.guard.outputs.configured == 'true'
+        run: |
+          URL=$(vercel deploy --prebuilt ${{ steps.env.outputs.flag }} --token="$VERCEL_TOKEN")
+          echo "Deployed to: $URL"
+          echo "### Deployed :rocket:" >> "$GITHUB_STEP_SUMMARY"
+          echo "$URL" >> "$GITHUB_STEP_SUMMARY"
