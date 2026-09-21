@@ -22,6 +22,7 @@ import { getRecentJournal } from '@/content/journal';
 export const metadata: Metadata = {
   title: 'Natural Stone Slabs — Granite, Marble, Quartz & Quartzite',
   description: site.description,
+  alternates: { canonical: '/' },
 };
 
 const pillars: Pillar[] = [

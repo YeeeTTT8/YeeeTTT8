@@ -6,6 +6,8 @@ import { StoneImage } from '@/components/ui/StoneImage';
 import { Button } from '@/components/ui/Button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CTABand } from '@/components/sections/CTABand';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { localBusinessJsonLd } from '@/lib/seo/jsonld';
 import { locations, getLocation } from '@/content/locations';
 import { MapPin, Phone, Mail, Clock, ArrowUpRight } from 'lucide-react';
 
@@ -24,6 +26,7 @@ export async function generateMetadata({
   return {
     title: `${loc.brand} — ${loc.city}, ${loc.state} Showroom`,
     description: `Visit the ${loc.brand} natural stone showroom in ${loc.city}, ${loc.state}.`,
+    alternates: { canonical: `/showrooms/${loc.slug}` },
   };
 }
 
@@ -43,6 +46,7 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
 
   return (
     <>
+      <JsonLd data={localBusinessJsonLd(loc)} />
       <section className="bg-ivory pb-band pt-32 sm:pt-36">
         <Container>
           <Breadcrumbs

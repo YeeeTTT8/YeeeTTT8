@@ -28,6 +28,7 @@ export async function generateMetadata({
   return {
     title: `${material.name} — Natural Stone`,
     description: material.intro,
+    alternates: { canonical: `/materials/${material.slug}` },
   };
 }
 

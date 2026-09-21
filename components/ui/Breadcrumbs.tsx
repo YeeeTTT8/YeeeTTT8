@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/seo/jsonld';
 
 export interface Crumb {
   label: string;
@@ -8,11 +10,12 @@ export interface Crumb {
 
 /**
  * Inner-page breadcrumb trail. The last crumb is the current page (no link).
- * JSON-LD BreadcrumbList is emitted separately in Phase 6.
+ * Also emits BreadcrumbList JSON-LD so every page using it gets structured data.
  */
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb">
+      <JsonLd data={breadcrumbJsonLd(items)} />
       <ol className="flex flex-wrap items-center gap-1 text-fluid-sm text-stone-600">
         {items.map((item, i) => {
           const last = i === items.length - 1;

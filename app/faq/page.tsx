@@ -3,6 +3,8 @@ import { Container } from '@/components/ui/Container';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
 import { PageIntro } from '@/components/sections/PageIntro';
 import { CTABand } from '@/components/sections/CTABand';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { faqPageJsonLd } from '@/lib/seo/jsonld';
 import { faqs } from '@/content/faqs';
 
 export const metadata: Metadata = {
@@ -19,6 +21,7 @@ export default function FaqPage() {
 
   return (
     <>
+      <JsonLd data={faqPageJsonLd(faqs)} />
       <PageIntro
         eyebrow="FAQ"
         title="Questions, answered"

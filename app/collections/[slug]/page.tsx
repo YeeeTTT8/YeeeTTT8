@@ -22,7 +22,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const collection = getCollection(slug);
   if (!collection) return {};
-  return { title: collection.name, description: collection.description };
+  return {
+    title: collection.name,
+    description: collection.description,
+    alternates: { canonical: `/collections/${collection.slug}` },
+  };
 }
 
 export default async function CollectionPage({

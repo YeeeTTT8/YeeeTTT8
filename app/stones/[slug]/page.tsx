@@ -7,6 +7,8 @@ import { StoneCard } from '@/components/ui/StoneCard';
 import { Button } from '@/components/ui/Button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { StoneDetailImage } from '@/components/sections/StoneDetailImage';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { stoneProductJsonLd } from '@/lib/seo/jsonld';
 import { stones, getStone } from '@/content/stones';
 import { getCollection } from '@/content/collections';
 import { getMaterial } from '@/content/materials';
@@ -28,6 +30,7 @@ export async function generateMetadata({
   return {
     title: `${stone.name} — ${stone.material}`,
     description: `${stone.name}: ${stone.note}`,
+    alternates: { canonical: `/stones/${stone.slug}` },
   };
 }
 
@@ -52,6 +55,7 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
+      <JsonLd data={stoneProductJsonLd(stone, material)} />
       <section className="bg-ivory pb-band pt-32 sm:pt-36">
         <Container>
           <Breadcrumbs

@@ -7,6 +7,8 @@ import { StoneImage } from '@/components/ui/StoneImage';
 import { JournalCard } from '@/components/ui/JournalCard';
 import { Prose } from '@/components/ui/Prose';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { articleJsonLd } from '@/lib/seo/jsonld';
 import { journal, getJournalPost } from '@/content/journal';
 
 export function generateStaticParams() {
@@ -24,6 +26,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/journal/${post.slug}` },
     openGraph: { type: 'article', title: post.title, description: post.excerpt },
   };
 }
@@ -47,6 +50,7 @@ export default async function JournalPostPage({
 
   return (
     <>
+      <JsonLd data={articleJsonLd(post)} />
       <article>
         <section className="bg-ivory pb-band pt-32 sm:pt-36">
           <Container>
