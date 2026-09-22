@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { LocationCard } from '@/components/ui/LocationCard';
 import { PageIntro } from '@/components/sections/PageIntro';
+import { ShowroomsNetwork } from '@/components/sections/ShowroomsNetwork';
 import { CTABand } from '@/components/sections/CTABand';
 import { locations } from '@/content/locations';
 
@@ -23,7 +24,9 @@ export default function ShowroomsPage() {
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Showrooms' }]}
       />
 
-      <section className="bg-ivory pb-band-lg">
+      <ShowroomsNetwork />
+
+      <section className="bg-ivory py-band-lg">
         <Container>
           <h2 className="font-display text-display-sm font-medium text-stone-900">InStyle</h2>
           <div className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
