@@ -7,6 +7,7 @@ import { StoneCard } from '@/components/ui/StoneCard';
 import { Button } from '@/components/ui/Button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { StoneDetailImage } from '@/components/sections/StoneDetailImage';
+import { SelectionToggle } from '@/components/selection/SelectionToggle';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { stoneProductJsonLd } from '@/lib/seo/jsonld';
 import { stones, getStone } from '@/content/stones';
@@ -107,6 +108,7 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
 
               <Reveal delay={0.16}>
                 <div className="mt-8 flex flex-col gap-3">
+                  <SelectionToggle slug={stone.slug} variant="button" />
                   <Button href={quoteHref} variant="primary" size="lg">
                     Request a sample or quote
                   </Button>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Stone } from '@/content/types';
 import { StoneImage } from '@/components/ui/StoneImage';
+import { SelectionToggle } from '@/components/selection/SelectionToggle';
 import { cn } from '@/lib/utils';
 
 interface StoneCardProps {
@@ -24,6 +25,9 @@ export function StoneCard({ stone, className, sizes }: StoneCardProps) {
             sizes={sizes ?? '(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw'}
             showTag={false}
           />
+        </div>
+        <div className="absolute right-2 top-2 z-10">
+          <SelectionToggle slug={stone.slug} />
         </div>
       </div>
       <h3 className="mt-4 font-display text-2xl font-medium text-stone-900">{stone.name}</h3>
