@@ -38,7 +38,7 @@ export function CollectionScroller({ collections }: { collections: Collection[] 
                 <StoneImage image={c.image} sizes="(min-width:1024px) 30vw, (min-width:640px) 46vw, 78vw" showTag={false} />
               </div>
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/95 via-stone-900/30 to-stone-900/5" />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-paper">
+              <div className="absolute inset-x-0 bottom-0 p-6 text-paper [text-shadow:0_1px_16px_rgba(0,0,0,0.5)]">
                 <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-brass">Collection</p>
                 <h3 className="mt-2 font-display text-3xl font-medium">{c.name}</h3>
                 <p className="mt-1 text-fluid-sm text-paper/80">{c.story}</p>

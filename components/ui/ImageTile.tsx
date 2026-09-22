@@ -58,7 +58,7 @@ export function ImageTile({
         className="absolute inset-3 rounded-sm border border-paper/0 transition-colors duration-700 ease-editorial group-hover:border-paper/40"
       />
 
-      <div className="absolute inset-x-0 bottom-0 p-5 text-paper">
+      <div className="absolute inset-x-0 bottom-0 p-5 text-paper [text-shadow:0_1px_16px_rgba(0,0,0,0.5)]">
         {eyebrow ? (
           <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-brass">{eyebrow}</p>
         ) : null}

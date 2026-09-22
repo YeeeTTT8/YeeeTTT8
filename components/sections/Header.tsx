@@ -42,7 +42,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-editorial',
         solid
-          ? 'bg-ivory/95 border-b border-hairline backdrop-blur-sm'
+          ? 'bg-ivory border-b border-hairline'
           : 'bg-transparent border-b border-transparent',
       )}
     >

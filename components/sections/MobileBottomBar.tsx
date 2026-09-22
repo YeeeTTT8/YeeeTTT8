@@ -15,7 +15,7 @@ export function MobileBottomBar() {
   return (
     <nav
       aria-label="Quick actions"
-      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-hairline bg-paper/95 backdrop-blur-sm lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-hairline bg-paper lg:hidden"
     >
       <Link href={callHref} className="flex flex-col items-center gap-1 py-3 text-stone-900">
         <Phone className="h-5 w-5" aria-hidden strokeWidth={1.5} />
