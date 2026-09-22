@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/materials',
     '/collections',
+    '/compare',
     '/services',
     '/showrooms',
     '/gallery',

@@ -54,6 +54,7 @@ export const footerNav: { heading: string; links: readonly NavLink[] }[] = [
     links: [
       { label: 'Materials', href: '/materials' },
       { label: 'Collections', href: '/collections' },
+      { label: 'Compare Slabs', href: '/compare' },
       { label: 'Gallery', href: '/gallery' },
       { label: 'Journal', href: '/journal' },
     ],
