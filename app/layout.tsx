@@ -9,6 +9,7 @@ import { BackToTop } from '@/components/ui/BackToTop';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { Cursor } from '@/components/ui/Cursor';
 import { IntroLoader } from '@/components/ui/IntroLoader';
+import { SelectionProvider } from '@/lib/selection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/Analytics';
 import { organizationJsonLd, webSiteJsonLd } from '@/lib/seo/jsonld';
@@ -41,12 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ScrollProgress />
         <Cursor />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
-        {/* Spacer so the fixed mobile bottom bar never covers footer content. */}
-        <div className="h-14 lg:hidden" aria-hidden />
-        <MobileBottomBar />
+        <SelectionProvider>
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+          {/* Spacer so the fixed mobile bottom bar never covers footer content. */}
+          <div className="h-14 lg:hidden" aria-hidden />
+          <MobileBottomBar />
+        </SelectionProvider>
         <BackToTop />
         <Analytics gaId={env.gaId} />
       </body>

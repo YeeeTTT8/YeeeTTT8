@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { primaryNav, inventoryLink, quoteLink, site } from '@/lib/site';
 import { Button } from '@/components/ui/Button';
 import { MobileMenu } from '@/components/sections/MobileMenu';
+import { SelectionIndicator } from '@/components/selection/SelectionIndicator';
 import { ArrowUpRight } from 'lucide-react';
 
 interface HeaderProps {
@@ -97,6 +98,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
 
         {/* Actions */}
         <div className="hidden items-center gap-3 lg:flex">
+          <SelectionIndicator solid={solid} />
           <Link
             href={inventoryLink.href}
             target="_blank"
