@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { toneFor } from '@/lib/placeholder';
 import { StoneImage } from '@/components/ui/StoneImage';
 import type { ImageRef } from '@/content/types';
@@ -33,6 +34,16 @@ export function VideoHero({ src, poster, enabled = false, image, children }: Vid
   const sectionRef = useRef<HTMLElement>(null);
   const [canPlay, setCanPlay] = useState(false);
   const tone = toneFor('warehouse-hero-nero');
+  const reduce = useReducedMotion();
+
+  // (#5) Scroll-linked hero: content drifts up and fades as you scroll in.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
 
   useEffect(() => {
     if (!enabled) return;
@@ -109,7 +120,12 @@ export function VideoHero({ src, poster, enabled = false, image, children }: Vid
       <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/30 to-transparent" />
       <div className="grain" />
 
-      <div className="relative z-10 w-full [text-shadow:0_1px_24px_rgba(0,0,0,0.4)]">{children}</div>
+      <motion.div
+        className="relative z-10 w-full [text-shadow:0_1px_24px_rgba(0,0,0,0.4)]"
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity, scale: contentScale }}
+      >
+        {children}
+      </motion.div>
     </section>
   );
 }
