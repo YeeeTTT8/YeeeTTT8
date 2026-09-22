@@ -17,7 +17,7 @@ import { Bookmatch } from '@/components/sections/Bookmatch';
 import { CollectionScroller } from '@/components/sections/CollectionScroller';
 import { MaterialVisualizer } from '@/components/sections/MaterialVisualizer';
 import { ShaderBand } from '@/components/sections/ShaderBand';
-import { CompareSlider } from '@/components/ui/CompareSlider';
+import { SlabComparer } from '@/components/sections/SlabComparer';
 import { Tilt } from '@/components/ui/Tilt';
 import { Magnetic } from '@/components/ui/MagneticButton';
 import { SectionRail } from '@/components/ui/SectionRail';
@@ -25,6 +25,7 @@ import { site, inventoryLink } from '@/lib/site';
 import { heroVideoUrl } from '@/lib/images';
 import { materials } from '@/content/materials';
 import { collections } from '@/content/collections';
+import { stones } from '@/content/stones';
 import { locations } from '@/content/locations';
 import { getRecentJournal } from '@/content/journal';
 
@@ -237,21 +238,23 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Compare finishes */}
+      {/* Compare any two slabs */}
       <section className="bg-ivory pb-band-lg">
         <Container>
           <SectionHeading
-            eyebrow="Polished or honed"
-            title="The same stone, two finishes"
-            intro="Drag to compare. Polished deepens the colour and reflects; honed is matte, softer and more forgiving."
+            eyebrow="Compare"
+            title="Put two slabs side by side"
+            intro="Choosing between stones? Pick any two and drag to compare colour, veining and finish."
           />
           <Reveal delay={0.1} className="mt-12">
-            <CompareSlider
-              before={{ src: '/placeholders/collection-ivory-coast', alt: 'Honed marble finish' }}
-              after={{ src: '/placeholders/collection-calacatta-noir', alt: 'Polished marble finish' }}
-              beforeLabel="Honed"
-              afterLabel="Polished"
-            />
+            <SlabComparer stones={stones} initialA="pale-carrara" initialB="noir-vein" />
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-8">
+              <Button href="/compare" variant="link">
+                Open the full comparison tool →
+              </Button>
+            </div>
           </Reveal>
         </Container>
       </section>
