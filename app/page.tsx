@@ -15,6 +15,11 @@ import { InventoryBanner } from '@/components/sections/InventoryBanner';
 import { CTABand } from '@/components/sections/CTABand';
 import { Bookmatch } from '@/components/sections/Bookmatch';
 import { CollectionScroller } from '@/components/sections/CollectionScroller';
+import { MaterialVisualizer } from '@/components/sections/MaterialVisualizer';
+import { ShaderBand } from '@/components/sections/ShaderBand';
+import { CompareSlider } from '@/components/ui/CompareSlider';
+import { Tilt } from '@/components/ui/Tilt';
+import { Magnetic } from '@/components/ui/MagneticButton';
 import { SectionRail } from '@/components/ui/SectionRail';
 import { site, inventoryLink } from '@/lib/site';
 import { heroVideoUrl } from '@/lib/images';
@@ -93,12 +98,16 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button href="/collections" variant="primary" size="lg">
-                Explore Collections
-              </Button>
-              <Button href="/contact?intent=quote" variant="outline" size="lg" className="border-paper/70 text-paper hover:bg-paper hover:text-stone-900">
-                Request a Quote
-              </Button>
+              <Magnetic>
+                <Button href="/collections" variant="primary" size="lg">
+                  Explore Collections
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button href="/contact?intent=quote" variant="outline" size="lg" className="border-paper/70 text-paper hover:bg-paper hover:text-stone-900">
+                  Request a Quote
+                </Button>
+              </Magnetic>
             </div>
           </Reveal>
         </Container>
@@ -139,16 +148,32 @@ export default function HomePage() {
           <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {materials.map((m, i) => (
               <Reveal key={m.slug} delay={i * 0.06}>
-                <ImageTile
-                  href={`/materials/${m.slug}`}
-                  image={m.image}
-                  title={m.name}
-                  caption={m.tagline}
-                  priority={i === 0}
-                  sizes="(min-width: 1024px) 25vw, 50vw"
-                />
+                <Tilt>
+                  <ImageTile
+                    href={`/materials/${m.slug}`}
+                    image={m.image}
+                    title={m.name}
+                    caption={m.tagline}
+                    priority={i === 0}
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                  />
+                </Tilt>
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Material visualizer */}
+      <section className="snap-start bg-paper py-band-lg">
+        <Container>
+          <SectionHeading
+            eyebrow="Try it"
+            title="See the surface"
+            intro="Pick a collection and watch the surface change. A quick way to feel the palette before you visit."
+          />
+          <div className="mt-12">
+            <MaterialVisualizer collections={collections} />
           </div>
         </Container>
       </section>
@@ -211,6 +236,33 @@ export default function HomePage() {
           </p>
         </Container>
       </section>
+
+      {/* Compare finishes */}
+      <section className="bg-ivory pb-band-lg">
+        <Container>
+          <SectionHeading
+            eyebrow="Polished or honed"
+            title="The same stone, two finishes"
+            intro="Drag to compare. Polished deepens the colour and reflects; honed is matte, softer and more forgiving."
+          />
+          <Reveal delay={0.1} className="mt-12">
+            <CompareSlider
+              before={{ src: '/placeholders/collection-ivory-coast', alt: 'Honed marble finish' }}
+              after={{ src: '/placeholders/collection-calacatta-noir', alt: 'Polished marble finish' }}
+              beforeLabel="Honed"
+              afterLabel="Polished"
+            />
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Material research — WebGL shader band */}
+      <ShaderBand eyebrow="Material research" title="Stone is never the same twice.">
+        <p className="max-w-xl">
+          Every slab records its own history of pressure, heat and time. We read that movement
+          slab by slab, so what reaches your project is chosen, not just supplied.
+        </p>
+      </ShaderBand>
 
       {/* 7 — Live inventory band */}
       <InventoryBanner />

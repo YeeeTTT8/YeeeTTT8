@@ -8,6 +8,7 @@ import { MobileBottomBar } from '@/components/sections/MobileBottomBar';
 import { BackToTop } from '@/components/ui/BackToTop';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { Cursor } from '@/components/ui/Cursor';
+import { IntroLoader } from '@/components/ui/IntroLoader';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/Analytics';
 import { organizationJsonLd, webSiteJsonLd } from '@/lib/seo/jsonld';
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${fontDisplay.variable} ${fontSans.variable}`}>
       <body className="font-sans text-fluid-base antialiased">
         <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
+        <IntroLoader />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
