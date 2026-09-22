@@ -13,18 +13,28 @@ const PLACEHOLDER_HOURS = [
   { day: 'Sunday', hours: 'Closed' },
 ];
 
-type LocationSeed = [slug: string, city: string, state: string, brand: 'InStyle' | 'Avani'];
-
-const seeds: LocationSeed[] = [
-  ['houston', 'Houston', 'TX', 'InStyle'],
-  ['memphis', 'Memphis', 'TN', 'Avani'],
-  ['nashville', 'Nashville', 'TN', 'Avani'],
-  ['denver', 'Denver', 'CO', 'Avani'],
-  ['atlanta', 'Atlanta', 'GA', 'InStyle'],
-  ['columbus', 'Columbus', 'OH', 'InStyle'],
+type LocationSeed = [
+  slug: string,
+  city: string,
+  state: string,
+  brand: 'InStyle' | 'Avani',
+  lat: number,
+  lng: number,
 ];
 
-export const locations: Location[] = seeds.map(([slug, city, state, brand]) => ({
+// Coordinates are the real city centres (public geography), used for the
+// network map + LocalBusiness JSON-LD. Precise showroom addresses remain
+// TODO(client).
+const seeds: LocationSeed[] = [
+  ['houston', 'Houston', 'TX', 'InStyle', 29.76, -95.37],
+  ['memphis', 'Memphis', 'TN', 'Avani', 35.15, -90.05],
+  ['nashville', 'Nashville', 'TN', 'Avani', 36.16, -86.78],
+  ['denver', 'Denver', 'CO', 'Avani', 39.74, -104.99],
+  ['atlanta', 'Atlanta', 'GA', 'InStyle', 33.75, -84.39],
+  ['columbus', 'Columbus', 'OH', 'InStyle', 39.96, -83.0],
+];
+
+export const locations: Location[] = seeds.map(([slug, city, state, brand, lat, lng]) => ({
   slug,
   city,
   state,
@@ -37,6 +47,7 @@ export const locations: Location[] = seeds.map(([slug, city, state, brand]) => (
     `${brand} Granite Marble ${city} ${state}`,
   )}`,
   image: { src: `/placeholders/showroom-${slug}`, alt: `${brand} showroom in ${city}, ${state}` },
+  geo: { lat, lng },
 }));
 
 export function getLocation(slug: string): Location | undefined {

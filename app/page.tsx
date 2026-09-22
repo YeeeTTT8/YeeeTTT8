@@ -220,9 +220,9 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             index="04"
-            eyebrow="Find it in place"
-            title="See stone in the room"
-            intro="Curated scenes by space. A full 3D visualizer is on the roadmap; for now, explore collections suited to each room."
+            eyebrow="Curated environments"
+            title="Stone in its element"
+            intro="Rooms composed around the material. Explore collections suited to each space — a fuller visualizer is on the roadmap."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
             {roomScenes.map((room, i) => (
