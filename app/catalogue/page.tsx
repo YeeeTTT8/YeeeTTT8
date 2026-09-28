@@ -27,10 +27,11 @@ export default function CataloguePage() {
                 <h2 className="font-display text-2xl font-medium text-stone-900">
                   InStyle catalogue (PDF)
                 </h2>
+                {/* TODO(client): add the finished catalogue at /public/catalogue.pdf — the
+                    download button below links there and serves it once present. */}
                 <p className="mt-2 text-fluid-sm text-stone-600">
-                  TODO(client): add the finished catalogue at{' '}
-                  <code className="text-stone-900">/public/catalogue.pdf</code>. The button below
-                  links there and will serve it once present.
+                  Materials, collections and finishes in one overview — ready to share with your
+                  fabricator or design team.
                 </p>
               </div>
             </div>

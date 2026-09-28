@@ -9,7 +9,7 @@ interface LocationCardProps {
 }
 
 /**
- * Compact showroom card: city/state, brand, placeholder hours and a
+ * Compact showroom card: city/state, brand, weekday hours (once supplied) and a
  * "Get directions" link. Full per-location pages come in a later phase.
  */
 export function LocationCard({ location, className }: LocationCardProps) {
@@ -22,12 +22,12 @@ export function LocationCard({ location, className }: LocationCardProps) {
       <h3 className="mt-2 font-display text-3xl font-medium text-stone-900">
         {location.city}, {location.state}
       </h3>
-      <p className="mt-3 flex items-start gap-2 text-fluid-sm text-stone-600">
-        <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden strokeWidth={1.5} />
-        <span>
-          {weekday ? `${weekday.day}: ${weekday.hours}` : 'Hours TODO(client)'}
-        </span>
-      </p>
+      {weekday && !weekday.hours.startsWith('TODO') ? (
+        <p className="mt-3 flex items-start gap-2 text-fluid-sm text-stone-600">
+          <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden strokeWidth={1.5} />
+          <span>{`${weekday.day}: ${weekday.hours}`}</span>
+        </p>
+      ) : null}
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
         <Link
           href={`/showrooms/${location.slug}`}

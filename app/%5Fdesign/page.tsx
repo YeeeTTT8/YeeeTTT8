@@ -17,7 +17,7 @@ const colours: { name: string; token: string; hex: string; note: string }[] = [
   { name: 'Stone 600', token: 'bg-stone-600', hex: '#5A554D', note: 'Secondary text' },
   { name: 'Stone 300', token: 'bg-stone-300', hex: '#D9D2C5', note: 'Hairlines / borders' },
   { name: 'Brass', token: 'bg-brass', hex: '#A8865A', note: 'Accent — large/decorative only' },
-  { name: 'Brand Red', token: 'bg-brand-red', hex: '#C8102E', note: 'Primary CTA — sparingly' },
+  { name: 'Brand Red', token: 'bg-brand-red', hex: '#C8102E', note: 'Wordmark and error states only' },
 ];
 
 const typeScale: { label: string; cls: string }[] = [

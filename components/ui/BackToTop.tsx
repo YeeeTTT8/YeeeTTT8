@@ -30,7 +30,7 @@ export function BackToTop() {
       type="button"
       onClick={toTop}
       aria-label="Back to top"
-      className="fixed bottom-24 right-4 z-40 rounded-full border border-hairline bg-paper/95 p-3 text-stone-900 shadow-md backdrop-blur-sm transition-colors hover:bg-stone-900 hover:text-paper focus-visible:outline-2 focus-visible:outline-brass lg:bottom-6"
+      className="fixed bottom-24 right-4 z-40 rounded-full border border-stone-900/10 bg-paper/95 p-3 text-stone-900 shadow-[0_6px_24px_rgba(0,0,0,0.25)] backdrop-blur-sm transition-colors hover:bg-stone-900 hover:text-paper focus-visible:outline-2 focus-visible:outline-brass lg:bottom-6"
     >
       <ArrowUp className="h-5 w-5" aria-hidden />
     </button>

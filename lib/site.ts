@@ -35,6 +35,12 @@ export const primaryNav: readonly NavLink[] = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
+/** Desktop header links — a shorter set so the bar breathes. Services and
+ * Journal stay reachable via the mobile menu, footer and in-page links. */
+export const desktopNav: readonly NavLink[] = primaryNav.filter(
+  (l) => l.href !== '/services' && l.href !== '/journal',
+);
+
 /** Right-aligned action links. */
 export const inventoryLink: NavLink = {
   label: 'Live Inventory',

@@ -14,10 +14,22 @@
   --stone-600: #5a554d; /* secondary text */
   --stone-300: #d9d2c5; /* hairlines, borders */
   --brass: #a8865a; /* accent — small details, eyebrows, numerals only */
-  --brand-red: #c8102e; /* primary CTA and tiny highlights only */
+  --brand-red: #c8102e; /* wordmark and error states only — CTAs are stone/brass */
 
   /* A slightly darker brass reserved for text that must meet AA on ivory. */
   --brass-ink: #806034;
+
+  /* RGB channel twins of the tokens above. Tailwind needs bare channels to
+     generate opacity modifiers (bg-stone-900/70, text-paper/80, …); with a
+     plain var() those classes silently produce no CSS. Keep in sync. */
+  --ivory-rgb: 246 242 234;
+  --paper-rgb: 251 249 244;
+  --stone-900-rgb: 26 24 22;
+  --stone-600-rgb: 90 85 77;
+  --stone-300-rgb: 217 210 197;
+  --brass-rgb: 168 134 90;
+  --brass-ink-rgb: 128 96 52;
+  --brand-red-rgb: 200 16 46;
 }
 
 @layer base {

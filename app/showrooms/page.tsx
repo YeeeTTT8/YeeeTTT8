@@ -20,7 +20,7 @@ export default function ShowroomsPage() {
       <PageIntro
         eyebrow="Showrooms"
         title="See the slabs in person"
-        intro="Natural stone is best chosen face to face. Visit us across the InStyle and Avani brands. Addresses and hours are being finalised — TODO(client)."
+        intro="Natural stone is best chosen face to face. Visit us across the InStyle and Avani brands."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Showrooms' }]}
       />
 

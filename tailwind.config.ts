@@ -6,23 +6,23 @@ import type { Config } from 'tailwindcss';
  * `text-stone-900`) rather than raw hex. Do not introduce raw hex in JSX.
  */
 const config: Config = {
-  content: [
-    './app/**/*.{ts,tsx,mdx}',
-    './components/**/*.{ts,tsx}',
-    './content/**/*.{ts,tsx,mdx}',
-  ],
+  content: ['./app/**/*.{ts,tsx,mdx}', './components/**/*.{ts,tsx}', './content/**/*.{ts,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        ivory: 'var(--ivory)',
-        paper: 'var(--paper)',
+        // Channel form so opacity modifiers (e.g. bg-stone-900/70) work.
+        ivory: 'rgb(var(--ivory-rgb) / <alpha-value>)',
+        paper: 'rgb(var(--paper-rgb) / <alpha-value>)',
         stone: {
-          900: 'var(--stone-900)',
-          600: 'var(--stone-600)',
-          300: 'var(--stone-300)',
+          900: 'rgb(var(--stone-900-rgb) / <alpha-value>)',
+          600: 'rgb(var(--stone-600-rgb) / <alpha-value>)',
+          300: 'rgb(var(--stone-300-rgb) / <alpha-value>)',
         },
-        brass: 'var(--brass)',
-        'brand-red': 'var(--brand-red)',
+        brass: {
+          DEFAULT: 'rgb(var(--brass-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--brass-ink-rgb) / <alpha-value>)',
+        },
+        'brand-red': 'rgb(var(--brand-red-rgb) / <alpha-value>)',
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],

@@ -19,18 +19,12 @@ export function InventoryBanner() {
               See what&rsquo;s in stock today.
             </h2>
             <p className="mt-4 max-w-xl text-fluid-base text-paper/70">
-              Browse live slab inventory on StoneProfitsWeb — current availability across
-              our warehouses, updated as stock moves.
+              Browse live slab inventory on StoneProfitsWeb — current availability across our
+              warehouses, updated as stock moves.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <Button
-              href={inventoryLink.href}
-              external
-              variant="outline"
-              size="lg"
-              className="border-paper text-paper hover:bg-paper hover:text-stone-900"
-            >
+            <Button href={inventoryLink.href} external variant="outline-light" size="lg">
               Browse Live Inventory
             </Button>
           </Reveal>

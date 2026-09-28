@@ -10,6 +10,7 @@ import { StatCounter } from '@/components/ui/StatCounter';
 import { Marquee } from '@/components/ui/Marquee';
 import { LocationCard } from '@/components/ui/LocationCard';
 import { JournalCard } from '@/components/ui/JournalCard';
+import { RoomHero } from '@/components/sections/RoomHero';
 import { SlabCompareHero } from '@/components/sections/SlabCompareHero';
 import { InventoryBanner } from '@/components/sections/InventoryBanner';
 import { CTABand } from '@/components/sections/CTABand';
@@ -17,7 +18,6 @@ import { Bookmatch } from '@/components/sections/Bookmatch';
 import { CollectionScroller } from '@/components/sections/CollectionScroller';
 import { MaterialVisualizer } from '@/components/sections/MaterialVisualizer';
 import { ShaderBand } from '@/components/sections/ShaderBand';
-import { SlabComparer } from '@/components/sections/SlabComparer';
 import { Tilt } from '@/components/ui/Tilt';
 import { SectionRail } from '@/components/ui/SectionRail';
 import { site, inventoryLink } from '@/lib/site';
@@ -59,12 +59,32 @@ const pillars: Pillar[] = [
     title: 'Delivery & logistics',
     body: 'Local delivery from warehouse stock to fabrication shops and job sites.',
   },
+  {
+    icon: 'Package',
+    title: 'Samples & selection',
+    body: 'Save the slabs you love to your selection, then request samples or a quote in one step.',
+  },
 ];
 
 const roomScenes = [
-  { title: 'Kitchen', caption: 'Islands, counters, backsplashes', href: '/collections?room=kitchen', seed: 'room-kitchen' },
-  { title: 'Bathroom', caption: 'Vanities and surrounds', href: '/collections?room=bathroom', seed: 'room-bathroom' },
-  { title: 'Living', caption: 'Fireplaces and features', href: '/collections?room=living', seed: 'room-living' },
+  {
+    title: 'Kitchen',
+    caption: 'Islands, counters, backsplashes',
+    href: '/collections?room=kitchen',
+    seed: 'room-kitchen',
+  },
+  {
+    title: 'Bathroom',
+    caption: 'Vanities and surrounds',
+    href: '/collections?room=bathroom',
+    seed: 'room-bathroom',
+  },
+  {
+    title: 'Living',
+    caption: 'Fireplaces and features',
+    href: '/collections?room=living',
+    seed: 'room-living',
+  },
 ];
 
 export default function HomePage() {
@@ -73,9 +93,17 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1 — Slab-compare hero: honed white marble wiping to dramatic black
-          veined stone. The first thing a visitor sees is the product's core
-          promise — compare any two real slabs before you buy. */}
+      {/* 1 — Room hero: a finished space first, so the visitor sees what the
+          stone becomes before they see the stone itself. */}
+      <RoomHero
+        image={{
+          src: '/placeholders/room-kitchen',
+          alt: 'Kitchen with a waterfall island in veined natural stone',
+        }}
+      />
+
+      {/* 2 — Slab compare: honed white marble wiping to dramatic black veined
+          stone — the core promise, compare any two real slabs before you buy. */}
       <SlabCompareHero stones={stones} leftSlug="chalk-vein" rightSlug="nero-gold" />
 
       {/* 2 — Intro statement band */}
@@ -84,9 +112,9 @@ export default function HomePage() {
           <Reveal>
             <p className="eyebrow eyebrow-rule mb-8">Est. {site.established}</p>
             <p className="dropcap max-w-4xl font-display text-display-md font-normal leading-tight text-stone-900">
-              Every slab is a single, unrepeatable thing — a record of pressure, heat and
-              time. We hold them in depth so you can choose the one that&rsquo;s right, and
-              stand behind it from selection to delivery.
+              Every slab is a single, unrepeatable thing — a record of pressure, heat and time. We
+              hold them in depth so you can choose the one that&rsquo;s right, and stand behind it
+              from selection to delivery.
             </p>
           </Reveal>
         </Container>
@@ -99,7 +127,6 @@ export default function HomePage() {
       <section className="bg-ivory py-band">
         <Container>
           <SectionHeading
-            index="01"
             eyebrow="Four materials"
             title="Choose by the stone itself"
             intro="Granite, marble, quartz and quartzite each behave differently. Start where it makes sense for how you live."
@@ -141,7 +168,6 @@ export default function HomePage() {
       <section className="bg-paper py-band-lg">
         <Container>
           <SectionHeading
-            index="02"
             eyebrow="Collections"
             title="Curated by colour and character"
             intro="Named groupings that make a wide inventory easy to navigate — each with its own story. Drag or scroll through them."
@@ -161,7 +187,10 @@ export default function HomePage() {
 
       {/* Bookmatched slab band */}
       <Bookmatch
-        image={{ src: '/placeholders/collection-calacatta-noir', alt: 'Bookmatched quartzite slab with mirrored veining' }}
+        image={{
+          src: '/placeholders/collection-calacatta-noir',
+          alt: 'Bookmatched quartzite slab with mirrored veining',
+        }}
         eyebrow="Bookmatched"
         title="Opened like a book, veining mirrored across the seam."
       />
@@ -170,7 +199,11 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <SectionRail label="Why InStyle">
-            <SectionHeading index="03" eyebrow="Why InStyle" title="A distributor built around selection" />
+            <SectionHeading
+              index="03"
+              eyebrow="Why InStyle"
+              title="A distributor built around selection"
+            />
             <div className="mt-12">
               <PillarList pillars={pillars} />
             </div>
@@ -189,39 +222,14 @@ export default function HomePage() {
               <StatCounter value={2} label="Brands" />
             </div>
           </Reveal>
-          <p className="mt-4 text-fluid-sm text-stone-600">
-            Established {site.established}. Further figures (slab counts, delivery reach) are
-            TODO(client) pending verified numbers.
-          </p>
-        </Container>
-      </section>
-
-      {/* Compare any two slabs */}
-      <section className="bg-ivory pb-band-lg">
-        <Container>
-          <SectionHeading
-            eyebrow="Compare"
-            title="Put two slabs side by side"
-            intro="Choosing between stones? Pick any two and drag to compare colour, veining and finish."
-          />
-          <Reveal delay={0.1} className="mt-12">
-            <SlabComparer stones={stones} initialA="pale-carrara" initialB="noir-vein" />
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="mt-8">
-              <Button href="/compare" variant="link">
-                Open the full comparison tool →
-              </Button>
-            </div>
-          </Reveal>
         </Container>
       </section>
 
       {/* Material research — WebGL shader band */}
       <ShaderBand eyebrow="Material research" title="Stone is never the same twice.">
         <p className="max-w-xl">
-          Every slab records its own history of pressure, heat and time. We read that movement
-          slab by slab, so what reaches your project is chosen, not just supplied.
+          Every slab records its own history of pressure, heat and time. We read that movement slab
+          by slab, so what reaches your project is chosen, not just supplied.
         </p>
       </ShaderBand>
 
@@ -232,17 +240,19 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <SectionHeading
-            index="04"
             eyebrow="Curated environments"
             title="Stone in its element"
-            intro="Rooms composed around the material. Explore collections suited to each space — a fuller visualizer is on the roadmap."
+            intro="Rooms composed around the material. Explore the collections suited to each space."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
             {roomScenes.map((room, i) => (
               <Reveal key={room.title} delay={i * 0.06}>
                 <ImageTile
                   href={room.href}
-                  image={{ src: `/placeholders/${room.seed}`, alt: `${room.title} scene in natural stone` }}
+                  image={{
+                    src: `/placeholders/${room.seed}`,
+                    alt: `${room.title} scene in natural stone`,
+                  }}
                   eyebrow="Room"
                   title={room.title}
                   caption={room.caption}
@@ -259,10 +269,9 @@ export default function HomePage() {
       <section className="bg-paper py-band-lg">
         <Container>
           <SectionHeading
-            index="05"
             eyebrow="Showrooms"
             title="Come see the slabs"
-            intro="Locations across the InStyle and Avani brands. Addresses and hours are being finalised."
+            intro="Natural stone is best chosen in person. Visit us across the InStyle and Avani brands."
           />
           <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {locations.map((loc) => (
@@ -283,7 +292,6 @@ export default function HomePage() {
       <section className="bg-ivory py-band-lg">
         <Container>
           <SectionHeading
-            index="06"
             eyebrow="Journal"
             title="Reading the stone"
             intro="Practical, honest guidance on choosing and caring for natural surfaces."
@@ -297,7 +305,10 @@ export default function HomePage() {
           </div>
           <Reveal delay={0.1}>
             <div className="mt-10">
-              <Link href="/journal" className="link-underline text-fluid-sm font-medium text-stone-900">
+              <Link
+                href="/journal"
+                className="link-underline text-fluid-sm font-medium text-stone-900"
+              >
                 Read the journal →
               </Link>
             </div>

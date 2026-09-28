@@ -86,7 +86,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               <Link
                 href={quoteLink.href}
                 onClick={onClose}
-                className="inline-flex items-center justify-center rounded-sm bg-brand-red px-6 py-4 text-fluid-base font-medium text-paper"
+                className="inline-flex items-center justify-center rounded-sm bg-stone-900 px-6 py-4 text-fluid-base font-medium tracking-wide text-paper"
               >
                 {quoteLink.label}
               </Link>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
@@ -34,7 +35,9 @@ export async function generateMetadata({
 function TodoOr({ value, children }: { value: string; children?: React.ReactNode }) {
   const isTodo = value.startsWith('TODO');
   return isTodo ? (
-    <span className="text-stone-600">To be confirmed</span>
+    <Link href="/contact" className="link-underline text-stone-900">
+      Contact us for visit details
+    </Link>
   ) : (
     <>{children ?? value}</>
   );
@@ -59,7 +62,12 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
           />
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
             <RevealImage className="relative aspect-[4/3] w-full rounded-sm bg-stone-900">
-              <StoneImage image={loc.image} sizes="(min-width: 1024px) 55vw, 100vw" priority showTag={false} />
+              <StoneImage
+                image={loc.image}
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                priority
+                showTag={false}
+              />
             </RevealImage>
             <div>
               <Reveal>
@@ -72,7 +80,11 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
               <Reveal delay={0.08}>
                 <dl className="mt-8 space-y-5">
                   <div className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
+                    <MapPin
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                      aria-hidden
+                      strokeWidth={1.5}
+                    />
                     <div>
                       <dt className="sr-only">Address</dt>
                       <dd className="text-fluid-base text-stone-600">
@@ -87,7 +99,11 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
+                    <Phone
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                      aria-hidden
+                      strokeWidth={1.5}
+                    />
                     <div>
                       <dt className="sr-only">Phone</dt>
                       <dd className="text-fluid-base text-stone-600">
@@ -96,7 +112,11 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
+                    <Mail
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                      aria-hidden
+                      strokeWidth={1.5}
+                    />
                     <div>
                       <dt className="sr-only">Email</dt>
                       <dd className="text-fluid-base text-stone-600">
@@ -105,16 +125,26 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
+                    <Clock
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                      aria-hidden
+                      strokeWidth={1.5}
+                    />
                     <div>
                       <dt className="sr-only">Hours</dt>
                       <dd className="text-fluid-base text-stone-600">
-                        {loc.hours.map((h) => (
-                          <span key={h.day} className="flex justify-between gap-6">
-                            <span>{h.day}</span>
-                            <span>{h.hours.startsWith('TODO') ? 'To be confirmed' : h.hours}</span>
-                          </span>
-                        ))}
+                        {loc.hours.some((h) => h.hours.startsWith('TODO')) ? (
+                          <Link href="/contact" className="link-underline text-stone-900">
+                            Contact us for opening hours
+                          </Link>
+                        ) : (
+                          loc.hours.map((h) => (
+                            <span key={h.day} className="flex justify-between gap-6">
+                              <span>{h.day}</span>
+                              <span>{h.hours}</span>
+                            </span>
+                          ))
+                        )}
                       </dd>
                     </div>
                   </div>

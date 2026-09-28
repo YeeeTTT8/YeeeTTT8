@@ -28,12 +28,22 @@ export function MaterialVisualizer({ collections }: { collections: Collection[] 
               i === active ? 'opacity-100' : 'opacity-0',
             )}
           >
-            <StoneImage image={c.image} sizes="(min-width:1024px) 60vw, 100vw" showTag={false} priority={i === 0} />
+            <StoneImage
+              image={c.image}
+              sizes="(min-width:1024px) 60vw, 100vw"
+              showTag={false}
+              priority={i === 0}
+            />
           </div>
         ))}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent" />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/20 to-transparent"
+        />
         <div className="absolute inset-x-0 bottom-0 p-6 text-paper [text-shadow:0_1px_16px_rgba(0,0,0,0.5)]">
-          <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-brass">Now showing</p>
+          <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-brass">
+            Now showing
+          </p>
           <h3 className="mt-1 font-display text-3xl font-medium">{current.name}</h3>
           <p className="mt-1 max-w-md text-fluid-sm text-paper/85">{current.story}</p>
         </div>
@@ -52,7 +62,7 @@ export function MaterialVisualizer({ collections }: { collections: Collection[] 
               aria-label={c.name}
               className={cn(
                 'relative aspect-square overflow-hidden rounded-sm ring-offset-2 ring-offset-ivory transition-all',
-                i === active ? 'ring-2 ring-brass' : 'ring-1 ring-hairline hover:ring-stone-600',
+                i === active ? 'ring-2 ring-brass' : 'ring-hairline ring-1 hover:ring-stone-600',
               )}
             >
               <StoneImage image={c.image} sizes="120px" showTag={false} />

@@ -13,21 +13,21 @@ export const services: Service[] = [
     slug: 'trade-program',
     name: 'Trade Program',
     summary: 'Support and pricing for fabricators, builders and designers.',
-    body: 'We work with fabricators, builders, architects and designers as a wholesale source. Trade partners get access to inventory, dependable supply and support through selection and delivery. TODO(client): confirm trade terms.',
+    body: 'We work with fabricators, builders, architects and designers as a wholesale source. Trade partners get access to inventory, dependable supply and support through selection and delivery.', // TODO(client): confirm trade terms.
     icon: 'Handshake',
   },
   {
     slug: 'fabrication-partners',
     name: 'Fabrication Partners',
     summary: 'Referrals to trusted local fabricators.',
-    body: 'We distribute slabs rather than fabricate them. Where helpful, we can point homeowners toward established local fabrication partners to template, cut and install. TODO(client): confirm partner network.',
+    body: 'We distribute slabs rather than fabricate them. Where helpful, we can point homeowners toward established local fabrication partners to template, cut and install.', // TODO(client): confirm partner network.
     icon: 'Wrench',
   },
   {
     slug: 'delivery-logistics',
     name: 'Delivery & Logistics',
     summary: 'Local delivery from warehouse stock.',
-    body: 'With warehouses across several cities, we hold depth in stock and deliver locally to fabrication shops and job sites. TODO(client): confirm delivery areas and lead times.',
+    body: 'With warehouses across several cities, we hold depth in stock and deliver locally to fabrication shops and job sites.', // TODO(client): confirm delivery areas and lead times.
     icon: 'Truck',
   },
   {
@@ -41,7 +41,7 @@ export const services: Service[] = [
     slug: 'prefab-tops',
     name: 'Prefabricated Tops',
     summary: 'Ready-to-install tops for common sizes.',
-    body: 'For some materials we carry prefabricated countertops and vanity tops in standard sizes — a faster, budget-friendly route for straightforward layouts. TODO(client): confirm which prefab lines are stocked.',
+    body: 'For some materials we carry prefabricated countertops and vanity tops in standard sizes — a faster, budget-friendly route for straightforward layouts.', // TODO(client): confirm which prefab lines are stocked.
     icon: 'LayoutTemplate',
   },
 ];

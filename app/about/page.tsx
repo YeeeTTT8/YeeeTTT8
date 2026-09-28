@@ -66,10 +66,8 @@ export default function AboutPage() {
                   Avani Granite &amp; Marble in Memphis, Nashville and Denver — with additional
                   reach in Atlanta and Columbus.
                 </p>
-                <p className="text-stone-600">
-                  TODO(client): expand the story with any milestones, founding details or figures
-                  you&rsquo;d like to include (all verified).
-                </p>
+                {/* TODO(client): expand the story with any milestones, founding details or
+                    figures you'd like to include (all verified). */}
               </div>
             </Reveal>
           </div>

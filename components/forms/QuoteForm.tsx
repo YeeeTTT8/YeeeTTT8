@@ -217,7 +217,7 @@ export function QuoteForm({ initialStone = '', initialAudience = 'homeowner' }: 
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center justify-center gap-2 rounded-sm bg-brand-red px-8 py-4 text-fluid-base font-medium text-paper transition-colors hover:bg-[#a50d26] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-sm bg-stone-900 px-8 py-4 text-fluid-base font-medium tracking-wide text-paper transition-colors hover:bg-brass focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass disabled:opacity-60"
         >
           {pending ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : null}
           {pending ? 'Sending…' : 'Send request'}

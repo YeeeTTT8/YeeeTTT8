@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type Variant = 'primary' | 'dark' | 'outline' | 'link';
+type Variant = 'primary' | 'dark' | 'outline' | 'light' | 'outline-light' | 'link' | 'link-light';
 type Size = 'md' | 'lg';
 
 const base =
@@ -11,17 +11,28 @@ const base =
   'focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none';
 
 const variants: Record<Variant, string> = {
-  // Primary red — used sparingly for the main conversion action.
+  // Primary — near-black warming to brass on hover. Brand red is reserved for
+  // the wordmark and error states; a quiet dark CTA reads as more premium.
   primary:
-    'bg-brand-red text-paper hover:bg-[#a50d26] focus-visible:outline-brand-red rounded-sm',
-  // Dark — for use on light bands where red would be too loud.
+    'bg-stone-900 text-paper tracking-wide hover:bg-brass focus-visible:outline-brass rounded-sm',
+  // Dark — alias kept for existing call sites.
   dark: 'bg-stone-900 text-paper hover:bg-black focus-visible:outline-stone-900 rounded-sm',
   // Outline — for secondary actions and external links (e.g. Live Inventory).
   outline:
     'border border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-paper ' +
     'focus-visible:outline-stone-900 rounded-sm',
+  // Light — solid primary for dark or photographic backgrounds.
+  light:
+    'bg-paper text-stone-900 tracking-wide [text-shadow:none] hover:bg-brass hover:text-paper ' +
+    'focus-visible:outline-paper rounded-sm',
+  // Outline on dark or photographic backgrounds.
+  'outline-light':
+    'border border-paper/70 text-paper hover:border-paper hover:bg-paper hover:text-stone-900 ' +
+    'focus-visible:outline-paper rounded-sm',
   // Text link with animated underline.
   link: 'link-underline text-stone-900 px-0 py-0 focus-visible:outline-brass',
+  // Text link on dark or photographic backgrounds.
+  'link-light': 'link-underline text-paper px-0 py-0 focus-visible:outline-paper',
 };
 
 const sizes: Record<Size, string> = {
@@ -54,13 +65,16 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
  */
 export function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', children, className } = props;
-  const classes = cn(base, variants[variant], variant !== 'link' && sizes[size], className);
+  const classes = cn(
+    base,
+    variants[variant],
+    !variant.startsWith('link') && sizes[size],
+    className,
+  );
 
   if ('href' in props && props.href !== undefined) {
     const { href, external, variant: _v, size: _s, className: _c, children: _ch, ...rest } = props;
-    const externalProps = external
-      ? { target: '_blank', rel: 'noopener noreferrer' }
-      : {};
+    const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
     return (
       <Link href={href} className={classes} {...externalProps} {...rest}>
         {children}

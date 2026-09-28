@@ -9,7 +9,8 @@ import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact & Request a Quote',
-  description: 'Request a quote or reach an InStyle Granite & Marble showroom. Homeowner and trade enquiries welcome.',
+  description:
+    'Request a quote or reach an InStyle Granite & Marble showroom. Homeowner and trade enquiries welcome.',
 };
 
 function digits(s: string): string {
@@ -34,9 +35,7 @@ export default async function ContactPage({
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
         <Reveal className="mt-8 max-w-3xl">
           <p className="eyebrow mb-4">Request a Quote</p>
-          <h1 className="text-display-lg font-medium text-stone-900">
-            Tell us about your project
-          </h1>
+          <h1 className="text-display-lg font-medium text-stone-900">Tell us about your project</h1>
           <div className="rule-brass mt-6" />
           <p className="mt-6 text-fluid-lg text-stone-600">
             Homeowner or trade — share the details and we&rsquo;ll help you find the right stone,
@@ -50,26 +49,41 @@ export default async function ContactPage({
           </Reveal>
 
           <Reveal delay={0.1} as="aside" className="lg:border-l lg:border-hairline lg:pl-12">
-            <h2 className="font-display text-2xl font-medium text-stone-900">Prefer to reach us directly?</h2>
+            <h2 className="font-display text-2xl font-medium text-stone-900">
+              Prefer to reach us directly?
+            </h2>
             <ul className="mt-6 space-y-5">
-              <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">Phone</p>
-                  {hasPhone ? (
-                    <a href={`tel:${digits(env.phone)}`} className="link-underline text-fluid-base text-stone-900">
+              {hasPhone ? (
+                <li className="flex items-start gap-3">
+                  <Phone
+                    className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                    aria-hidden
+                    strokeWidth={1.5}
+                  />
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">
+                      Phone
+                    </p>
+                    <a
+                      href={`tel:${digits(env.phone)}`}
+                      className="link-underline text-fluid-base text-stone-900"
+                    >
                       {env.phone}
                     </a>
-                  ) : (
-                    <p className="text-fluid-base text-stone-600">TODO(client): phone</p>
-                  )}
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">WhatsApp</p>
-                  {hasWhatsApp ? (
+                  </div>
+                </li>
+              ) : null}
+              {hasWhatsApp ? (
+                <li className="flex items-start gap-3">
+                  <MessageCircle
+                    className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                    aria-hidden
+                    strokeWidth={1.5}
+                  />
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">
+                      WhatsApp
+                    </p>
                     <a
                       href={`https://wa.me/${digits(env.whatsapp)}`}
                       target="_blank"
@@ -78,28 +92,39 @@ export default async function ContactPage({
                     >
                       Message us
                     </a>
-                  ) : (
-                    <p className="text-fluid-base text-stone-600">TODO(client): WhatsApp</p>
-                  )}
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">Email</p>
-                  {hasEmail ? (
-                    <a href={`mailto:${env.contactEmail}`} className="link-underline text-fluid-base text-stone-900">
+                  </div>
+                </li>
+              ) : null}
+              {hasEmail ? (
+                <li className="flex items-start gap-3">
+                  <Mail
+                    className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                    aria-hidden
+                    strokeWidth={1.5}
+                  />
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">
+                      Email
+                    </p>
+                    <a
+                      href={`mailto:${env.contactEmail}`}
+                      className="link-underline text-fluid-base text-stone-900"
+                    >
                       {env.contactEmail}
                     </a>
-                  ) : (
-                    <p className="text-fluid-base text-stone-600">TODO(client): email</p>
-                  )}
-                </div>
-              </li>
+                  </div>
+                </li>
+              ) : null}
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brass" aria-hidden strokeWidth={1.5} />
+                <MapPin
+                  className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                  aria-hidden
+                  strokeWidth={1.5}
+                />
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">Showrooms</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-stone-600">
+                    Showrooms
+                  </p>
                   <Link href="/showrooms" className="link-underline text-fluid-base text-stone-900">
                     Find a location
                   </Link>

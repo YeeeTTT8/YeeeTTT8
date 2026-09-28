@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useInView, useReducedMotion } from 'framer-motion';
 import type { Stone } from '@/content/types';
 import { StoneImage } from '@/components/ui/StoneImage';
 import { Container } from '@/components/ui/Container';
@@ -19,11 +19,11 @@ interface SlabCompareHeroProps {
 }
 
 /**
- * Full-bleed hero: two real slabs, one dividing handle. On load the divider
- * sweeps slowly to each edge and back to centre — a quiet demonstration, not
- * a gimmick — then sits ready for the visitor to drag. This is the site's
- * first visual: the promise is "compare any two real slabs, side by side,
- * before you buy."
+ * Full-bleed compare band: two real slabs, one dividing handle. When the band
+ * scrolls into view the divider sweeps slowly to each edge and back to centre
+ * — a quiet demonstration, not a gimmick — then sits ready for the visitor to
+ * drag. Sits directly under the room hero: "compare any two real slabs, side
+ * by side, before you buy."
  */
 export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHeroProps) {
   const left = stones.find((s) => s.slug === leftSlug) ?? stones[0]!;
@@ -36,9 +36,10 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
   const sectionRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const reduceMotion = useReducedMotion();
+  const inView = useInView(sectionRef, { once: true, amount: 0.4 });
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !inView) return;
     setIntroRunning(true);
     const steps = [
       [500, 18],
@@ -51,7 +52,7 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
       timers.forEach(clearTimeout);
       clearTimeout(done);
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, inView]);
 
   const setFromClientX = useCallback((clientX: number) => {
     const el = sectionRef.current;
@@ -75,7 +76,7 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
   return (
     <section
       ref={sectionRef}
-      className="relative h-[100svh] min-h-[640px] w-full touch-none select-none overflow-hidden bg-stone-900 text-paper"
+      className="relative h-[90svh] min-h-[600px] w-full touch-none select-none overflow-hidden bg-stone-900 text-paper"
       onPointerMove={(e) => dragging.current && setFromClientX(e.clientX)}
       onPointerUp={endDrag}
       onPointerLeave={endDrag}
@@ -100,7 +101,7 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
           where the divider sits. Not part of the wipe; it never animates. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-stone-900/75 via-stone-900/15 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-stone-900/85 via-stone-900/40 to-transparent"
       />
       <div
         aria-hidden
@@ -109,10 +110,10 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
       <div className="grain" />
 
       {/* Gallery placards — bottom corners. */}
-      <span className="absolute bottom-7 left-4 z-10 rounded-sm bg-stone-900/70 px-3 py-1.5 text-[11px] uppercase tracking-eyebrow text-paper backdrop-blur-sm sm:left-6 lg:left-10">
+      <span className="absolute bottom-7 left-4 z-10 hidden rounded-sm bg-stone-900/70 px-3 py-1.5 text-[11px] uppercase tracking-eyebrow text-paper backdrop-blur-sm sm:left-6 sm:inline lg:left-10">
         {left.name} · {left.finish}
       </span>
-      <span className="absolute bottom-7 right-4 z-10 rounded-sm bg-stone-900/70 px-3 py-1.5 text-[11px] uppercase tracking-eyebrow text-paper backdrop-blur-sm sm:right-6 lg:right-10">
+      <span className="absolute bottom-7 right-4 z-10 hidden rounded-sm bg-stone-900/70 px-3 py-1.5 text-[11px] uppercase tracking-eyebrow text-paper backdrop-blur-sm sm:right-6 sm:inline lg:right-10">
         {right.name} · {right.finish}
       </span>
 
@@ -142,7 +143,7 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
             if (e.key === 'ArrowLeft') setPos((p) => Math.max(0, p - 4));
             if (e.key === 'ArrowRight') setPos((p) => Math.min(100, p + 4));
           }}
-          className="absolute top-1/2 -ml-6 -mt-6 flex h-12 w-12 items-center justify-center rounded-full border border-paper/40 bg-paper text-stone-900 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-editorial hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+          className="absolute top-[24%] -ml-6 -mt-6 flex h-12 w-12 items-center justify-center rounded-full border border-paper/40 bg-paper text-stone-900 shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-editorial hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass sm:top-1/2"
         >
           <span aria-hidden className="text-base tracking-widest">
             ‹›
@@ -153,7 +154,7 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
         <span
           aria-hidden
           className={cn(
-            'absolute left-1/2 top-[calc(50%+2.75rem)] -translate-x-1/2 whitespace-nowrap text-[11px] uppercase tracking-eyebrow text-paper/80 transition-opacity duration-700',
+            'absolute left-1/2 top-[calc(24%+2.75rem)] -translate-x-1/2 whitespace-nowrap text-[11px] uppercase tracking-eyebrow text-paper/80 transition-opacity duration-700 sm:top-[calc(50%+2.75rem)]',
             hasInteracted || introRunning ? 'opacity-0' : 'opacity-100',
           )}
         >
@@ -161,52 +162,34 @@ export function SlabCompareHero({ stones, leftSlug, rightSlug }: SlabCompareHero
         </span>
       </div>
 
-      {/* Headline block */}
-      <Container className="relative z-10 flex h-full flex-col justify-center pb-24 pt-32">
-        <div className="max-w-2xl [text-shadow:0_1px_24px_rgba(0,0,0,0.45)]">
+      {/* Headline block — bottom-aligned on phones, clear of the handle. */}
+      <Container className="relative z-10 flex h-full flex-col justify-end pb-24 pt-32 sm:justify-center">
+        <div className="max-w-xl [text-shadow:0_1px_24px_rgba(0,0,0,0.45)]">
           <Reveal>
-            <p className="eyebrow eyebrow-rule text-brass">Compare before you buy</p>
+            <p className="eyebrow eyebrow-rule text-paper/80">Compare before you buy</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-6 text-display-lg font-medium text-paper">
-              See both slabs, <em className="font-normal italic text-brass">side by side</em>,
-              before you choose either.
-            </h1>
+            <h2 className="mt-6 text-display-lg font-normal text-paper">
+              Two slabs, <em className="italic text-brass">side by side</em>.
+            </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-8 max-w-lg text-fluid-lg text-paper/80">
-              Any two real slabs from our inventory, held up against each other — colour,
-              veining and finish, compared honestly, so the choice is yours to make with
-              confidence.
+            <p className="mt-6 max-w-md text-fluid-lg text-paper/85">
+              Hold any two stones from our inventory against each other — colour, veining and
+              finish, compared honestly.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10">
               <Magnetic>
-                <Button href="/compare" variant="primary" size="lg">
+                <Button href="/compare" variant="light" size="lg">
                   Compare Slabs
-                </Button>
-              </Magnetic>
-              <Magnetic>
-                <Button
-                  href="/collections"
-                  variant="outline"
-                  size="lg"
-                  className="border-paper/70 text-paper hover:bg-paper hover:text-stone-900"
-                >
-                  Explore Collections
                 </Button>
               </Magnetic>
             </div>
           </Reveal>
         </div>
       </Container>
-
-      {/* Scroll cue */}
-      <div className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-3">
-        <span className="text-[11px] uppercase tracking-eyebrow text-paper/60">Scroll</span>
-        <span className="h-10 w-px bg-gradient-to-b from-paper/50 to-transparent" aria-hidden />
-      </div>
     </section>
   );
 }

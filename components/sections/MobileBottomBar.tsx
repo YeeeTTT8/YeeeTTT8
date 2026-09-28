@@ -23,7 +23,7 @@ export function MobileBottomBar() {
       </Link>
       <Link
         href="/contact?intent=quote"
-        className="flex flex-col items-center gap-1 border-x border-hairline py-3 text-brand-red"
+        className="flex flex-col items-center gap-1 border-x border-hairline py-3 text-brass-ink"
       >
         <FileText className="h-5 w-5" aria-hidden strokeWidth={1.5} />
         <span className="text-[11px] font-medium uppercase tracking-wider">Quote</span>

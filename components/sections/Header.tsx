@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { primaryNav, inventoryLink, quoteLink, site } from '@/lib/site';
+import { desktopNav, inventoryLink, quoteLink, site } from '@/lib/site';
 import { Button } from '@/components/ui/Button';
 import { MobileMenu } from '@/components/sections/MobileMenu';
 import { SelectionIndicator } from '@/components/selection/SelectionIndicator';
@@ -42,9 +42,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-editorial',
-        solid
-          ? 'bg-ivory border-b border-hairline'
-          : 'bg-transparent border-b border-transparent',
+        solid ? 'border-b border-hairline bg-ivory' : 'border-b border-transparent bg-transparent',
       )}
     >
       {/* Top-down scrim so nav stays legible over a bright hero. */}
@@ -64,7 +62,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
         <Link
           href="/"
           className={cn(
-            'font-display text-2xl font-semibold tracking-tight transition-colors',
+            'font-display text-[2rem] font-semibold leading-none tracking-tight transition-colors lg:text-[2.35rem]',
             solid ? 'text-stone-900' : 'text-paper',
           )}
           aria-label={`${site.name} — home`}
@@ -73,11 +71,8 @@ export function Header({ transparentOverHero }: HeaderProps) {
         </Link>
 
         {/* Desktop nav */}
-        <nav
-          className="hidden items-center gap-7 lg:flex"
-          aria-label="Primary"
-        >
-          {primaryNav.map((link) => {
+        <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
+          {desktopNav.map((link) => {
             const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
               <Link
@@ -113,7 +108,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
             {inventoryLink.label}
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
-          <Button href={quoteLink.href} variant="primary" size="md">
+          <Button href={quoteLink.href} variant={solid ? 'primary' : 'light'} size="md">
             {quoteLink.label}
           </Button>
         </div>
@@ -122,7 +117,7 @@ export function Header({ transparentOverHero }: HeaderProps) {
         <button
           type="button"
           className={cn(
-            'lg:hidden inline-flex flex-col items-center justify-center gap-1.5 p-2',
+            'inline-flex flex-col items-center justify-center gap-1.5 p-2 lg:hidden',
             solid ? 'text-stone-900' : 'text-paper',
           )}
           aria-expanded={menuOpen}
@@ -136,7 +131,9 @@ export function Header({ transparentOverHero }: HeaderProps) {
               menuOpen && 'translate-y-[7px] rotate-45',
             )}
           />
-          <span className={cn('block h-px w-6 bg-current transition-opacity', menuOpen && 'opacity-0')} />
+          <span
+            className={cn('block h-px w-6 bg-current transition-opacity', menuOpen && 'opacity-0')}
+          />
           <span
             className={cn(
               'block h-px w-6 bg-current transition-transform',

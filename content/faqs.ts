@@ -6,7 +6,7 @@ export const faqs: Faq[] = [
   {
     question: 'Do you sell directly to homeowners, or only to the trade?',
     answer:
-      'Both. Homeowners are welcome to visit a showroom and select slabs; fabricators, builders and designers can also work with us through our trade program. TODO(client): confirm any minimums or account requirements.',
+      'Both. Homeowners are welcome to visit a showroom and select slabs; fabricators, builders and designers can also work with us through our trade program.', // TODO(client): confirm any minimums or account requirements.
     category: 'Ordering',
   },
   {
@@ -30,13 +30,13 @@ export const faqs: Faq[] = [
   {
     question: 'Do you fabricate and install countertops?',
     answer:
-      'We are a slab distributor rather than a fabricator. We can refer you to established local fabrication partners who template, cut and install. TODO(client): confirm partner referrals.',
+      'We are a slab distributor rather than a fabricator. We can refer you to established local fabrication partners who template, cut and install.', // TODO(client): confirm partner referrals.
     category: 'Trade',
   },
   {
     question: 'How does delivery work?',
     answer:
-      'We hold stock across several warehouses and deliver locally to fabrication shops and job sites. TODO(client): confirm delivery areas, scheduling and lead times.',
+      'We hold stock across several warehouses and deliver locally to fabrication shops and job sites.', // TODO(client): confirm delivery areas, scheduling and lead times.
     category: 'Delivery',
   },
   {
@@ -48,7 +48,7 @@ export const faqs: Faq[] = [
   {
     question: 'What thicknesses do slabs come in?',
     answer:
-      'Slabs are commonly stocked in 2 cm and 3 cm thicknesses depending on the material and use. TODO(client): confirm stocked thicknesses per material.',
+      'Slabs are commonly stocked in 2 cm and 3 cm thicknesses depending on the material and use.', // TODO(client): confirm stocked thicknesses per material.
     category: 'Materials',
   },
 ];

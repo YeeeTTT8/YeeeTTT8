@@ -88,10 +88,8 @@ export function SelectionBoard({ stones }: { stones: Stone[] }) {
           Request samples or a quote
         </h2>
         <p className="mt-3 max-w-prose text-fluid-base text-stone-600">
+          {/* TODO(client): confirm whether samples are mailed or viewed at the showroom. */}
           Send your whole selection at once. We&rsquo;ll arrange samples or put together a quote.
-          <span className="mt-1 block text-fluid-sm text-stone-600/80">
-            TODO(client): confirm whether samples are mailed or viewed at the showroom.
-          </span>
         </p>
         <div className="mt-8">
           <SampleRequestForm nameBySlug={nameBySlug} />

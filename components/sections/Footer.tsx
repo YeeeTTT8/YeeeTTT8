@@ -35,9 +35,7 @@ export function Footer() {
                   <li key={`${group.heading}-${link.href}`}>
                     <Link
                       href={link.href}
-                      {...(link.external
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                        : {})}
+                      {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       className="link-underline inline-flex items-center gap-1 text-fluid-sm text-paper/80 hover:text-paper"
                     >
                       {link.label}
@@ -59,9 +57,7 @@ export function Footer() {
               <a href={`mailto:${env.contactEmail}`} className="link-underline hover:text-paper">
                 {env.contactEmail}
               </a>
-            ) : (
-              <span className="text-paper/40">TODO(client): email</span>
-            )}
+            ) : null}
             <Link href="/privacy" className="link-underline hover:text-paper">
               Privacy
             </Link>
