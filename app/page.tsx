@@ -10,7 +10,7 @@ import { StatCounter } from '@/components/ui/StatCounter';
 import { Marquee } from '@/components/ui/Marquee';
 import { LocationCard } from '@/components/ui/LocationCard';
 import { JournalCard } from '@/components/ui/JournalCard';
-import { VideoHero } from '@/components/sections/VideoHero';
+import { SlabCompareHero } from '@/components/sections/SlabCompareHero';
 import { InventoryBanner } from '@/components/sections/InventoryBanner';
 import { CTABand } from '@/components/sections/CTABand';
 import { Bookmatch } from '@/components/sections/Bookmatch';
@@ -19,10 +19,8 @@ import { MaterialVisualizer } from '@/components/sections/MaterialVisualizer';
 import { ShaderBand } from '@/components/sections/ShaderBand';
 import { SlabComparer } from '@/components/sections/SlabComparer';
 import { Tilt } from '@/components/ui/Tilt';
-import { Magnetic } from '@/components/ui/MagneticButton';
 import { SectionRail } from '@/components/ui/SectionRail';
 import { site, inventoryLink } from '@/lib/site';
-import { heroVideoUrl } from '@/lib/images';
 import { materials } from '@/content/materials';
 import { collections } from '@/content/collections';
 import { stones } from '@/content/stones';
@@ -75,50 +73,10 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1 — Video hero */}
-      <VideoHero
-        src={heroVideoUrl}
-        enabled
-        image={{ src: '/placeholders/warehouse-hero', alt: 'Rows of natural stone slabs in the InStyle warehouse' }}
-      >
-        <Container className="pb-20 pt-40">
-          <Reveal>
-            <p className="eyebrow eyebrow-rule text-brass">{site.tagline}</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="mt-6 max-w-4xl text-display-xl font-medium text-paper">
-              Stone selected <em className="font-normal italic text-brass">slab by slab</em>, from
-              our quarries to your project.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-8 max-w-xl text-fluid-lg text-paper/80">
-              A natural-stone importer and distributor since {site.established} — granite,
-              marble, quartz and quartzite, held in depth across our warehouses.
-            </p>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Magnetic>
-                <Button href="/collections" variant="primary" size="lg">
-                  Explore Collections
-                </Button>
-              </Magnetic>
-              <Magnetic>
-                <Button href="/contact?intent=quote" variant="outline" size="lg" className="border-paper/70 text-paper hover:bg-paper hover:text-stone-900">
-                  Request a Quote
-                </Button>
-              </Magnetic>
-            </div>
-          </Reveal>
-        </Container>
-
-        {/* Scroll cue */}
-        <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-3">
-          <span className="text-[11px] uppercase tracking-eyebrow text-paper/60">Scroll</span>
-          <span className="h-10 w-px bg-gradient-to-b from-paper/50 to-transparent" aria-hidden />
-        </div>
-      </VideoHero>
+      {/* 1 — Slab-compare hero: honed white marble wiping to dramatic black
+          veined stone. The first thing a visitor sees is the product's core
+          promise — compare any two real slabs before you buy. */}
+      <SlabCompareHero stones={stones} leftSlug="chalk-vein" rightSlug="nero-gold" />
 
       {/* 2 — Intro statement band */}
       <section className="bg-ivory py-band-lg">

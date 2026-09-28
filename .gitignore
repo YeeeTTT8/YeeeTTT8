@@ -31,3 +31,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# generated video projects
+/brag-output-*/
+/showreel-output-*/
+
+# local claude settings
+/.claude/
