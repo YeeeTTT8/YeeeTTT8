@@ -56,7 +56,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
       </div>
 
       {/* CSS masonry via columns */}
-      <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
+      <div className="mt-8 columns-1 gap-4 sm:columns-2 [&>*]:mb-4">
         {filtered.map((item, i) => (
           <button
             key={item.id}

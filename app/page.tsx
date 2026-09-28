@@ -21,6 +21,7 @@ import { ShaderBand } from '@/components/sections/ShaderBand';
 import { Tilt } from '@/components/ui/Tilt';
 import { SectionRail } from '@/components/ui/SectionRail';
 import { site, inventoryLink } from '@/lib/site';
+import { hasCatalogue, catalogueRequestHref } from '@/lib/catalogue';
 import { materials } from '@/content/materials';
 import { collections } from '@/content/collections';
 import { stones } from '@/content/stones';
@@ -319,9 +320,17 @@ export default function HomePage() {
       {/* 11 — Catalogue CTA */}
       <CTABand
         eyebrow="Take it with you"
-        title="Download the catalogue"
-        body="A PDF overview of materials, collections and finishes to share with your fabricator or design team."
-        primary={{ label: 'Download catalogue', href: '/catalogue' }}
+        title={hasCatalogue ? 'Download the catalogue' : 'Request the catalogue'}
+        body={
+          hasCatalogue
+            ? 'A PDF overview of materials, collections and finishes to share with your fabricator or design team.'
+            : "A PDF overview of materials, collections and finishes — ask and we'll send it to you or your design team."
+        }
+        primary={
+          hasCatalogue
+            ? { label: 'Download catalogue', href: '/catalogue' }
+            : { label: 'Request the catalogue', href: catalogueRequestHref }
+        }
         secondary={{ label: 'Browse live inventory', href: inventoryLink.href, external: true }}
       />
     </>

@@ -95,6 +95,13 @@ export function resolvePlaceholder(src: string): string | null {
   if (!src.startsWith('/placeholders/')) return null;
   const key = src.slice('/placeholders/'.length);
 
+  // Aliases: content names that differ from the image map's keys.
+  const ALIAS: Record<string, string> = {
+    'journal-read-a-slab': 'journal-read-slab',
+    'journal-stone-care': 'journal-care',
+  };
+  if (ALIAS[key]) return imageUrl(ALIAS[key]);
+
   // Direct keys (materials, rooms, journal, warehouse).
   if (imageUrl(key)) return imageUrl(key);
   if (key.startsWith('material-')) return imageUrl(key);

@@ -32,16 +32,8 @@ export async function generateMetadata({
   };
 }
 
-function TodoOr({ value, children }: { value: string; children?: React.ReactNode }) {
-  const isTodo = value.startsWith('TODO');
-  return isTodo ? (
-    <Link href="/contact" className="link-underline text-stone-900">
-      Contact us for visit details
-    </Link>
-  ) : (
-    <>{children ?? value}</>
-  );
-}
+/** Placeholder values (TODO(client)) are hidden rather than shown. */
+const isSet = (value: string) => !value.startsWith('TODO');
 
 export default async function ShowroomPage({ params }: { params: Promise<{ city: string }> }) {
   const { city } = await params;
@@ -88,42 +80,40 @@ export default async function ShowroomPage({ params }: { params: Promise<{ city:
                     <div>
                       <dt className="sr-only">Address</dt>
                       <dd className="text-fluid-base text-stone-600">
-                        <TodoOr value={loc.addressLines.join(', ')}>
-                          {loc.addressLines.map((line) => (
-                            <span key={line} className="block">
-                              {line}
-                            </span>
-                          ))}
-                        </TodoOr>
+                        {loc.addressLines.filter(isSet).map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
                       </dd>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Phone
-                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
-                      aria-hidden
-                      strokeWidth={1.5}
-                    />
-                    <div>
-                      <dt className="sr-only">Phone</dt>
-                      <dd className="text-fluid-base text-stone-600">
-                        <TodoOr value={loc.phone} />
-                      </dd>
+                  {isSet(loc.phone) ? (
+                    <div className="flex items-start gap-3">
+                      <Phone
+                        className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                        aria-hidden
+                        strokeWidth={1.5}
+                      />
+                      <div>
+                        <dt className="sr-only">Phone</dt>
+                        <dd className="text-fluid-base text-stone-600">{loc.phone}</dd>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Mail
-                      className="mt-0.5 h-5 w-5 shrink-0 text-brass"
-                      aria-hidden
-                      strokeWidth={1.5}
-                    />
-                    <div>
-                      <dt className="sr-only">Email</dt>
-                      <dd className="text-fluid-base text-stone-600">
-                        <TodoOr value={loc.email} />
-                      </dd>
+                  ) : null}
+                  {isSet(loc.email) ? (
+                    <div className="flex items-start gap-3">
+                      <Mail
+                        className="mt-0.5 h-5 w-5 shrink-0 text-brass"
+                        aria-hidden
+                        strokeWidth={1.5}
+                      />
+                      <div>
+                        <dt className="sr-only">Email</dt>
+                        <dd className="text-fluid-base text-stone-600">{loc.email}</dd>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                   <div className="flex items-start gap-3">
                     <Clock
                       className="mt-0.5 h-5 w-5 shrink-0 text-brass"

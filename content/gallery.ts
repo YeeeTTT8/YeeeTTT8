@@ -9,19 +9,20 @@ export interface GalleryItem {
 }
 
 /**
- * SAMPLE DATA — placeholder project imagery. All items are clearly marked
- * placeholders until real project photography is supplied (TODO client).
+ * SAMPLE DATA — representative project imagery, one tile per distinct photo
+ * (repeating the same image reads as padding). TODO(client): add real project
+ * photography and extend this list.
  */
 const CATEGORIES: GalleryCategory[] = ['Kitchen', 'Bathroom', 'Living', 'Commercial'];
 
-export const galleryItems: GalleryItem[] = Array.from({ length: 12 }, (_, i) => {
+export const galleryItems: GalleryItem[] = Array.from({ length: CATEGORIES.length }, (_, i) => {
   const category = CATEGORIES[i % CATEGORIES.length]!;
   return {
     id: `project-${i + 1}`,
     category,
     image: {
       src: `/placeholders/gallery-${i + 1}`,
-      alt: `${category} project in natural stone (sample placeholder)`,
+      alt: `${category} project in natural stone`,
     },
   };
 });

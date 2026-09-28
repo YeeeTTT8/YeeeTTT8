@@ -7,7 +7,8 @@ import { galleryItems } from '@/content/gallery';
 
 export const metadata: Metadata = {
   title: 'Gallery',
-  description: 'Natural stone in finished spaces — kitchens, bathrooms, living areas and commercial projects.',
+  description:
+    'Natural stone in finished spaces — kitchens, bathrooms, living areas and commercial projects.',
 };
 
 export default function GalleryPage() {
@@ -16,7 +17,7 @@ export default function GalleryPage() {
       <PageIntro
         eyebrow="Gallery"
         title="Stone in place"
-        intro="Slabs become surfaces. A look at natural stone across kitchens, bathrooms, living spaces and commercial work. Imagery below is placeholder until project photography is supplied."
+        intro="Slabs become surfaces. A look at natural stone across kitchens, bathrooms, living spaces and commercial work."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Gallery' }]}
       />
 

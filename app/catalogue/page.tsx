@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { PageIntro } from '@/components/sections/PageIntro';
-import { Download, FileText } from 'lucide-react';
+import { hasCatalogue, catalogueRequestHref } from '@/lib/catalogue';
+import { Download, FileText, Mail } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Catalogue',
-  description: 'Download the InStyle Granite & Marble catalogue of materials, collections and finishes.',
+  description: 'The InStyle Granite & Marble catalogue of materials, collections and finishes.',
 };
 
 export default function CataloguePage() {
@@ -36,10 +37,17 @@ export default function CataloguePage() {
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button href="/catalogue.pdf" external variant="primary" size="lg">
-                <Download className="h-5 w-5" aria-hidden />
-                Download catalogue
-              </Button>
+              {hasCatalogue ? (
+                <Button href="/catalogue.pdf" external variant="primary" size="lg">
+                  <Download className="h-5 w-5" aria-hidden />
+                  Download catalogue
+                </Button>
+              ) : (
+                <Button href={catalogueRequestHref} variant="primary" size="lg">
+                  <Mail className="h-5 w-5" aria-hidden />
+                  Request the catalogue
+                </Button>
+              )}
               <Button href="/contact?intent=quote" variant="outline" size="lg">
                 Request a quote instead
               </Button>

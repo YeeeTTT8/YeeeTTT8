@@ -50,7 +50,8 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
     { label: 'Colour family', value: stone.colourFamily },
     { label: 'Finish', value: stone.finish },
     { label: 'Thickness', value: stone.thicknessCm.map((t) => `${t} cm`).join(' · ') },
-    { label: 'Origin', value: stone.origin },
+    // Origin is omitted until supplied (TODO(client) in content/stones.ts).
+    ...(stone.origin.startsWith('TODO') ? [] : [{ label: 'Origin', value: stone.origin }]),
     { label: 'Collection', value: collection?.name ?? '—' },
   ];
 
@@ -79,9 +80,7 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
             {/* Details */}
             <div>
               <Reveal>
-                {collection ? (
-                  <p className="eyebrow">{collection.name}</p>
-                ) : null}
+                {collection ? <p className="eyebrow">{collection.name}</p> : null}
                 <h1 className="mt-4 text-display-md font-medium text-stone-900">{stone.name}</h1>
                 <div className="rule-brass mt-6" />
                 <p className="mt-6 text-fluid-lg text-stone-600">{stone.note}</p>
@@ -90,7 +89,10 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
               <Reveal delay={0.08}>
                 <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
                   {specs.map((spec) => (
-                    <div key={spec.label} className="flex items-baseline justify-between gap-4 py-3">
+                    <div
+                      key={spec.label}
+                      className="flex items-baseline justify-between gap-4 py-3"
+                    >
                       <dt className="text-fluid-sm uppercase tracking-eyebrow text-stone-600">
                         {spec.label}
                       </dt>
@@ -135,9 +137,7 @@ export default async function StonePage({ params }: { params: Promise<{ slug: st
           <Container>
             <SectionHeading eyebrow="Pairs well with" title="Complementary stones" />
             <div className="mt-10 grid grid-cols-2 gap-6 lg:grid-cols-4">
-              {pairs.map((s) =>
-                s ? <StoneCard key={s.slug} stone={s} /> : null,
-              )}
+              {pairs.map((s) => (s ? <StoneCard key={s.slug} stone={s} /> : null))}
             </div>
           </Container>
         </section>

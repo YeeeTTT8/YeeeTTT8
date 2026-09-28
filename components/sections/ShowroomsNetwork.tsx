@@ -43,7 +43,7 @@ export function ShowroomsNetwork() {
       <div className="grain" />
       <Container className="relative py-band-lg">
         <Reveal>
-          <p className="eyebrow text-brass">We are global</p>
+          <p className="eyebrow text-brass">Across the United States</p>
           <h2 className="mt-4 max-w-2xl text-display-md font-normal text-paper">
             Six cities, two brands, one network.
           </h2>
